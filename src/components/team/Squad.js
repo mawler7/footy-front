@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaStar, FaFutbol, FaClock, FaHandsHelping } from 'react-icons/fa';
-import styled from 'styled-components';
-import BaseButton from './../common/BaseButton'
 import LazyPlayerImage from '../players/LazyPlayerImage';
-
+import {
+    PositionGroupSeparator,
+    TableHeaderRow,
+    TableHeaderCell,
+    LeagueLogoImage,
+    PlayerDetailsWrapper,
+    PlayerNameText,
+    SquadTable,
+    StatCell,
+    TableStatHeaderCell,
+    PlayerInfoCell,
+    PlayerRow,
+    LeagueFilterWrapper,
+    LeagueTooltip,
+} from '../../styles/team/SquadStyles';
+import { LeagueButton } from '../../styles/buttons/buttons';
+import { StyledStandingWrapper } from '../../styles/standings/StandingsStyles';
 
 const YellowCardIcon = () => (
     <svg width="12" height="15" viewBox="0 0 20 20" fill="yellow">
@@ -21,8 +35,6 @@ const RedCardIcon = () => (
 const Squad = ({ id }) => {
     const [squad, setSquad] = useState([]);
     const [activeLeague, setActiveLeague] = useState(null);
-    const [activeTab, setActiveTab] = useState('match');
-    const [activeSubTab, setActiveSubTab] = useState('predictions');
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
     useEffect(() => {
@@ -60,8 +72,6 @@ const Squad = ({ id }) => {
     const handlePlayerClick = (playerId) => {
         window.location.href = `/player/${playerId}`;
     };
-
-
 
     const calculateAge = (birthDate) => {
         if (!birthDate) return '-';
@@ -132,206 +142,73 @@ const Squad = ({ id }) => {
     };
 
     return (
-        <SquadContainer>
-            <LeagueFilterContainer>
+        <StyledStandingWrapper >
+
+            <LeagueFilterWrapper>
                 {squad.map((league) => (
                     <LeagueButton
                         key={league.league.id}
-                        active={activeLeague === league.league.id} // Sprawdź, czy warunek jest poprawny
+                        $isActive={activeLeague === league.league.id}
                         onClick={() => handleLeagueClick(league.league.id)}
                     >
-                        {league.league.leagueName}
+                        <LeagueLogoImage
+                            src={league.league.logo}
+                            alt={league.league.leagueName}
+                        />
+                        <LeagueTooltip>{league.league.leagueName}</LeagueTooltip>
                     </LeagueButton>
                 ))}
-            </LeagueFilterContainer>
+            </LeagueFilterWrapper>
 
-            <StyledTable>
+            <SquadTable>
                 {Object.keys(groupedPlayers).map((positionGroup, index) => (
                     <React.Fragment key={positionGroup}>
-                        {index > 0 && <GroupSeparator />}
-                        <TableHeader>
-                            <HeaderCell>{positionGroup}</HeaderCell>
-                            <StyledTableStandingsHeaderCell onClick={() => handleSort('age')}>Age</StyledTableStandingsHeaderCell>
-                            <StyledTableStandingsHeaderCell onClick={() => handleSort('rating')}><FaStar /></StyledTableStandingsHeaderCell>
-                            <StyledTableStandingsHeaderCell onClick={() => handleSort('appearances')}><FaFutbol /></StyledTableStandingsHeaderCell>
-                            <StyledTableStandingsHeaderCell onClick={() => handleSort('minutes')}><FaClock /></StyledTableStandingsHeaderCell>
-                            <StyledTableStandingsHeaderCell onClick={() => handleSort('goals')}><FaFutbol style={{ color: 'green' }} /></StyledTableStandingsHeaderCell>
-                            <StyledTableStandingsHeaderCell onClick={() => handleSort('assists')}><FaHandsHelping /></StyledTableStandingsHeaderCell>
-                            <StyledTableStandingsHeaderCell onClick={() => handleSort('yellowCards')}><YellowCardIcon /></StyledTableStandingsHeaderCell>
-                            <StyledTableStandingsHeaderCell onClick={() => handleSort('redCards')}><RedCardIcon /></StyledTableStandingsHeaderCell>
-                        </TableHeader>
-
+                        {index > 0 && <PositionGroupSeparator />}
+                        <TableHeaderRow>
+                            <TableHeaderCell>{positionGroup}</TableHeaderCell>
+                            <TableStatHeaderCell onClick={() => handleSort('age')}>Age</TableStatHeaderCell >
+                            <TableStatHeaderCell onClick={() => handleSort('rating')}><FaStar /></TableStatHeaderCell >
+                            <TableStatHeaderCell onClick={() => handleSort('appearances')}><FaFutbol /></TableStatHeaderCell >
+                            <TableStatHeaderCell onClick={() => handleSort('minutes')}><FaClock /></TableStatHeaderCell >
+                            <TableStatHeaderCell onClick={() => handleSort('goals')}><FaFutbol style={{ color: 'green' }} /></TableStatHeaderCell >
+                            <TableStatHeaderCell onClick={() => handleSort('assists')}><FaHandsHelping /></TableStatHeaderCell >
+                            <TableStatHeaderCell onClick={() => handleSort('yellowCards')}><YellowCardIcon /></TableStatHeaderCell >
+                            <TableStatHeaderCell onClick={() => handleSort('redCards')}><RedCardIcon /></TableStatHeaderCell >
+                        </TableHeaderRow>
                         {sortedPlayers(groupedPlayers[positionGroup]).map((playerData) => {
                             const playerStats = getPlayerStatistics(playerData);
                             return (
-                                <TableRow key={playerData.player.id} onClick={() => handlePlayerClick(playerData.player.id)}>
-                                    <TableCellPlayer>
-                                        <PlayerInfo>
+                                <PlayerRow
+                                    key={playerData.player.id}
+                                    onClick={() => handlePlayerClick(playerData.player.id)}
+                                >
+                                    <PlayerInfoCell>
+                                        <PlayerDetailsWrapper>
                                             <LazyPlayerImage
                                                 playerId={playerData.player.id}
                                                 photoUrl={playerStats.photo}
                                                 alt={playerData.player.name}
                                             />
-                                            <PlayerName>{playerData.player.name}</PlayerName>
-                                        </PlayerInfo>
-                                    </TableCellPlayer>
-                                    <StyledTableCell>{playerStats.age}</StyledTableCell>
-                                    <StyledTableCell>{playerStats.rating}</StyledTableCell>
-                                    <StyledTableCell>{playerStats.appearances}</StyledTableCell>
-                                    <StyledTableCell>{playerStats.minutes}</StyledTableCell>
-                                    <StyledTableCell>{playerStats.goals}</StyledTableCell>
-                                    <StyledTableCell>{playerStats.assists}</StyledTableCell>
-                                    <StyledTableCell>{playerStats.yellowCards}</StyledTableCell>
-                                    <StyledTableCell>{playerStats.redCards}</StyledTableCell>
-                                </TableRow>
+                                            <PlayerNameText>{playerData.player.name}</PlayerNameText>
+                                        </PlayerDetailsWrapper>
+                                    </PlayerInfoCell>
+                                    <StatCell>{playerStats.age}</StatCell>
+                                    <StatCell>{playerStats.rating}</StatCell>
+                                    <StatCell>{playerStats.appearances}</StatCell>
+                                    <StatCell>{playerStats.minutes}</StatCell>
+                                    <StatCell>{playerStats.goals}</StatCell>
+                                    <StatCell>{playerStats.assists}</StatCell>
+                                    <StatCell>{playerStats.yellowCards}</StatCell>
+                                    <StatCell>{playerStats.redCards}</StatCell>
+                                </PlayerRow>
                             );
                         })}
                     </React.Fragment>
                 ))}
-            </StyledTable>
-        </SquadContainer>
+            </SquadTable>
+        </  StyledStandingWrapper>
     );
 };
 
 export default Squad;
 
-const StyledTableCell = styled.td`
-  padding: 5px;
-  text-align: center;
-  font-size: 12px;
-  color: #ffffff;
-  min-width: ${({ minWidth }) => minWidth || 'auto'};
-  max-width: ${({ maxWidth }) => maxWidth || 'auto'};
-`;
-
-
-
-
-const SquadContainer = styled.div`
-    width: 100%;
-  max-width: 720px;
-    background-color: #1e1f24;
-    border-radius: 12px;
-    padding: 5px;
-    margin: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-`;
-
-const LeagueFilterContainer = styled.div`
-  display: flex;
-  margin-bottom: 16px;
-  gap: 12px;
-`;
-
-const LeagueButton = styled(BaseButton)`
-  background: ${({ $isActive }) => ($isActive ? 'rgba(68, 76, 78, 0.85)' : 'rgba(48, 54, 56, 0.65)')};
-  color: ${({ $isActive }) => ($isActive ? '#ffffff' : '#b0b4b8')};
-  border: ${({ $isActive }) => ($isActive ? '2px solid rgb(35, 40, 42)' : '1px solid rgba(68, 76, 78, 0.5)')};
-  border-radius: 5px;
-  padding: 6px 12px;
-  font-weight: 700;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    background: ${({ $isActive }) => ($isActive ? 'rgb(85, 94, 97)' : 'rgb(58, 63, 65)')};
-    color: #ffffff;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(85, 94, 97, 0.6);
-  }
-
-  &:active {
-    transform: scale(0.97);
-  }
-`;
-
-const StyledTable = styled.table`
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #282b30;
-    color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-`;
-
-const TableHeader = styled.tr`
-    background-color: #3a3d42;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    height: 35px;
-`;
-
-const TableRow = styled.tr`
-      cursor: pointer;
-        &:hover {
-    background: ${({ $isActive }) => ($isActive ? 'rgb(85, 94, 97)' : 'rgb(58, 63, 65)')};
-    color: #ffffff;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(85, 94, 97, 0.6);
-  }
-
-  &:active {
-    transform: scale(0.97);
-  }
-`;
-
-const TableCellPlayer = styled.td`
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    text-align: left;
-    font-size: 12px;
-    color: #e0e0e0;
-
-`;
-
-const PlayerPhoto = styled.img`
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    margin-right: 10px;
-`;
-
-const PlayerName = styled.span`
-margin-left:10px;
-    font-size: 12px;
-    color: #ffffff;
-    max-width: 160px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-`;
-
-const HeaderCell = styled.th`
-    padding: 8px;
-    text-align: center;
-    font-size: 13px;
-    background-color: #3a3d42;
-    color: #ffffff;
-    width:250px;
-`;
-
-const StyledTableStandingsHeaderCell = styled.th`
-    padding: 8px;
-    text-align: center;
-    font-size: 12px;
-    color: #ffffff;
-    background-color: #3a3d42;
-`;
-
-const GroupSeparator = styled.tr`
-    height: 15px;  
-`;
-
-const PlayerInfo = styled.div`
-    display: flex;
-    align-items: center;
-`;

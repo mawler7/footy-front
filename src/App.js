@@ -1,23 +1,20 @@
-import React, { Suspense } from 'react';
+import React, { useContext } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { AuthProvider } from './components/context/AuthContext';
-import GlobalStyle from './styles/GlobalStyles';
-import { theme } from './styles/GlobalStyles';
-import AppContent from './components/AppContent';
+import { GlobalStyles } from './styles/GlobalStyles';
+import { lightTheme, darkTheme } from './styles/content/themes';
 
-const App = () => (
-    <ThemeProvider theme={theme}>
-        <DndProvider backend={HTML5Backend}>
-            <AuthProvider>
-                <GlobalStyle />
-                <Suspense fallback={<div>Loading...</div>}>
-                    <AppContent />
-                </Suspense>
-            </AuthProvider>
-        </DndProvider>
-    </ThemeProvider>
-);
+import AppContent from './components/context/AppContent';
+import { AuthContext } from './components/context/AuthContext';
+
+const App = () => {
+    const { userPreferences } = useContext(AuthContext);
+
+    return (
+        <ThemeProvider theme={userPreferences.darkMode ? darkTheme : lightTheme}>
+            <GlobalStyles />
+            <AppContent />
+        </ThemeProvider>
+    );
+};
 
 export default App;

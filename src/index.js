@@ -1,17 +1,20 @@
 import React from 'react';
 import { AuthProvider } from './components/context/AuthContext';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
-ReactDOM.render(
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
+
+root.render(
     <Router>
         <AuthProvider>
             <App />
         </AuthProvider>
-    </Router>,
-    document.getElementById('root')
+    </Router>
 );
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/service-worker.js')
