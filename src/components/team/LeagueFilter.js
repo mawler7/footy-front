@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { FilterContainer, FilterLabel, Select } from '../../styles/Styles';
 
 const LeagueFilter = ({ leagues, onSelectLeague }) => (
   <FilterContainer>
@@ -17,21 +17,3 @@ const LeagueFilter = ({ leagues, onSelectLeague }) => (
 
 export default LeagueFilter;
 
-const FilterContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const FilterLabel = styled.label`
-  margin-right: 10px;
-  color: white;
-`;
-
-const Select = styled.select`
-  padding: 5px 10px;
-  border-radius: 5px;
-  background: #222;
-  color: white;
-  border: 1px solid #444;
-`;

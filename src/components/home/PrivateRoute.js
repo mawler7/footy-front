@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
+import { LoadingWrapper, Spinner } from '../../styles/GlobalStyles';
 
 const PrivateRoute = ({ children }) => {
     const { isLoggedIn, isLoading } = useContext(AuthContext);
 
-    console.log("PrivateRoute - isLoggedIn:", isLoggedIn, "isLoading:", isLoading);
-
     if (isLoading) {
-        return <div>Loading...</div>;
+        return (
+            <LoadingWrapper>
+                <Spinner />
+            </LoadingWrapper>
+        );
     }
-
     return isLoggedIn ? children : <Navigate to="/login" replace />;
 };
 

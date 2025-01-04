@@ -1,9 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { FormItem, TabButton } from '../../styles/GlobalStyles';
-import { ThemeProvider } from 'styled-components';
-import { theme, TableCell } from '../../styles/GlobalStyles';
+import { TabButton } from '../../styles/buttons/buttons';
+import {
+    SummaryTableWrapper,
+    RoundHeader,
+    NoMatches,
+    TableRow,
+    DateCell,
+    HomeTeamCell,
+    TeamName,
+    TeamLogo,
+    ScoreCell,
+    AwayTeamCell,
+    ResultIndicatorCell,
+    FormItem,
+    StyledStandingWrapper,
+    TableWrapper,
+} from '../../styles/team/SummaryStyles';
+
 const formatDate = (isoString) => {
     const date = new Date(isoString);
     const day = String(date.getDate()).padStart(2, '0');
@@ -57,9 +71,10 @@ const Summary = ({ fixtures = [], teamName }) => {
         }
 
         return (
-            <SummaryTableWrapper ref={sectionRef}>
-                <RoundHeader>{isUpcoming ? 'Scheduled' : 'Results'}</RoundHeader>
-                <TableWrapper>
+            < SummaryTableWrapper>
+
+                <RoundHeader >{isUpcoming ? 'Scheduled' : 'Results'}</RoundHeader>
+                < TableWrapper>
                     {matches.slice(0, showAll ? matches.length : 5).map((match, index) => {
                         const isHomeTeam = match.homeTeamName === teamName;
                         const homeScore = parseInt(match.home, 10);
@@ -80,134 +95,31 @@ const Summary = ({ fixtures = [], teamName }) => {
                                     <TeamLogo src={match.awayTeamLogo} alt={match.awayTeamName} />
                                     <TeamName align="left">{match.awayTeamName}</TeamName>
                                 </AwayTeamCell>
-                                {!isUpcoming && (
-                                    <ResultIndicatorCell>
-                                        <FormItem result={resultIndicator}>{resultIndicator}</FormItem>
-                                    </ResultIndicatorCell>
-                                )}
+
+                                <ResultIndicatorCell>
+                                    <FormItem result={resultIndicator}>{resultIndicator}</FormItem>
+                                </ResultIndicatorCell>
+
                             </TableRow>
                         );
                     })}
-                </TableWrapper>
+                </ TableWrapper>
                 {matches.length > 5 && (
                     <TabButton onClick={isUpcoming ? toggleScheduledVisibility : toggleResultsVisibility}>
-                        {showAll ? 'Show less' : 'Show more matches'}
+                        {showAll ? 'Show less' : 'Show more'}
                     </TabButton>
                 )}
-            </SummaryTableWrapper>
+
+            </  SummaryTableWrapper >
         );
     };
 
     return (
-        <ThemeProvider theme={theme}>
-            <LayoutWrapper>
-                {renderMatches(finishedMatches, showAllResults, false, resultsRef)}
-                {renderMatches(upcomingMatches, showAllScheduled, true, scheduledRef)}
-            </LayoutWrapper>
-        </ThemeProvider>
+        <StyledStandingWrapper >
+            {renderMatches(finishedMatches, showAllResults, false, resultsRef)}
+            {renderMatches(upcomingMatches, showAllScheduled, true, scheduledRef)}
+        </StyledStandingWrapper>
     );
 };
 
 export default Summary;
-
-const LayoutWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    color: white;
-    background-color: rgba(28, 30, 36, 0.85);
-    border-radius: 10px;
-    width: 100%;
-    max-width: 660px;
-`;
-
-const SummaryTableWrapper = styled.div`
-    margin-bottom: 15px;
-    background-color: rgba(28, 30, 36, 0.85);
-    border-radius: 10px;
-    padding: 10px;
-`;
-
-const RoundHeader = styled.h4`
-    color: ${({ theme }) => theme.colors.white};
-    font-size: 14px;
-    font-weight: bold;
-    border-bottom: 1px solid #34495e;
-    padding-bottom: 8px;
-    margin-bottom: 10px;
-`;
-
-const TableWrapper = styled.div`
-    width: 100%;
-    background-color: ${({ theme }) => theme.colors.background};
-    border-radius: 8px;
-    overflow: hidden;
-`;
-
-const TableRow = styled.div`
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    border-bottom: 1px solid #555;
- 
-    &:hover {
-        background: rgba(255, 255, 255, 0.08);
-    }
-`;
-
-const DateCell = styled(TableCell)`
-    font-size: 12px;
-    color: ${({ theme }) => theme.colors.white};
-    text-align: left;
-    width: 90px;
-`;
-
-
-const TeamLogo = styled.img`
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-`;
-
-const TeamName = styled.div`
-    font-size: 12px;
-    color: ${({ theme }) => theme.colors.white};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-`;
-
-const ScoreCell = styled.div`
-    text-align: center;
-    width: 28px;
-    font-size: 13px;
-    font-weight: bold;
-    color: ${({ theme }) => theme.colors.white};
-`;
-
-const ResultIndicatorCell = styled.div`
-    width: 50px;
-    text-align: center;
-`;
-
-const NoMatches = styled.div`
-    text-align: center;
-    color: #bbb;
-    font-size: 14px;
-    margin-top: 10px;
-`;
-
-const HomeTeamCell = styled(TableCell)`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 230px;
-  gap: ${({ theme }) => theme.spacing.small};
-`;
-
-const AwayTeamCell = styled(TableCell)`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 230px;
-  gap: ${({ theme }) => theme.spacing.small};
-`;
