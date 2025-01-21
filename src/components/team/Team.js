@@ -4,8 +4,8 @@ import useTeamData from '../../hooks/teams/useTeamData';
 import TeamHeader from './TeamHeader';
 import TabNavigation from './TabNavigation';
 import TeamDetailsContent from './TeamDetailsContent';
-import { TeamContent } from '../../styles/content/AppContentStyles';
-import { LoadingWrapper, Spinner } from '../../styles/GlobalStyles';
+import { TeamWrapper } from '../../styles/content/AppContentStyles';
+import { LoadingWrapper, Spinner } from '../../styles/content/GlobalStyles';
 
 const Team = (isBettingSlipOpen) => {
   const { id } = useParams();
@@ -23,7 +23,7 @@ const Team = (isBettingSlipOpen) => {
   if (error) return <p>{error}</p>;
 
   return (
-    <TeamContent>
+    <TeamWrapper >
       {team && <TeamHeader team={team} />}
       <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
       {team && (
@@ -38,7 +38,7 @@ const Team = (isBettingSlipOpen) => {
 
         />
       )}
-    </TeamContent>
+    </TeamWrapper>
   );
 };
 

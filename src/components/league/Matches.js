@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LoadingWrapper, Spinner } from '../../styles/GlobalStyles';
+import { LoadingWrapper, Spinner } from '../../styles/content/GlobalStyles';
 import { ResultsMatchesTableWrapper } from '../../styles/content/AppContentStyles';
 import Round from './Round';
 

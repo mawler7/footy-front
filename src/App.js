@@ -1,20 +1,16 @@
-import React, { useContext } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from './styles/GlobalStyles';
-import { lightTheme, darkTheme } from './styles/content/themes';
-
+import React from 'react';
+import ContextProvider from './components/context/ContextProvider';
 import AppContent from './components/context/AppContent';
-import { AuthContext } from './components/context/AuthContext';
+import GlobalStyles from './styles/content/GlobalStyles';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
-const App = () => {
-    const { userPreferences } = useContext(AuthContext);
-
-    return (
-        <ThemeProvider theme={userPreferences.darkMode ? darkTheme : lightTheme}>
-            <GlobalStyles />
+const App = () => (
+    <ContextProvider>
+        <GlobalStyles />
+        <ErrorBoundary>
             <AppContent />
-        </ThemeProvider>
-    );
-};
+        </ErrorBoundary>
+    </ContextProvider>
+);
 
 export default App;

@@ -10,21 +10,17 @@ import {
 } from '../../styles/league/LeagueHeaderStyles';
 
 const LeagueHeader = ({ leagueName, logo, season, isBettingSlipOpen }) => {
-  if (!leagueName || !logo || !season) {
-    return (
-      <LeagueHeaderWrapper isBettingSlipOpen={isBettingSlipOpen}>
-        <Placeholder>Loading...</Placeholder>
-      </LeagueHeaderWrapper>
-    );
-  }
-
   return (
-    <LeagueHeaderWrapper>
+    <LeagueHeaderWrapper isBettingSlipOpen={isBettingSlipOpen}>
       <LeftSection>
-        <LeagueLogo src={logo} alt="League Logo" />
+        {logo ? (
+          <LeagueLogo src={logo} alt="League Logo" />
+        ) : (
+          <Placeholder>No logo available</Placeholder>
+        )}
         <LeagueInfo>
-          <LeagueName>{leagueName}</LeagueName>
-          <Season>{`${season}/${season + 1}`}</Season>
+          <LeagueName>{leagueName || 'League name unavailable'}</LeagueName>
+          <Season>{season ? `${season}/${season + 1}` : 'Season unavailable'}</Season>
         </LeagueInfo>
       </LeftSection>
     </LeagueHeaderWrapper>

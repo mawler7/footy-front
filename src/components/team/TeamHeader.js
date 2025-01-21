@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { TeamHeaderContent, TeamImage, TeamInfoItem, TeamInfoSection, TeamLogoDetails, TeamName } from '../../styles/team/TeamStyles';
+import {
+  TeamHeaderContent, TeamImage, TeamInfoItem, TeamHeaderWrapper, TeamLogoDetails, TeamName
+} from '../../styles/team/TeamStyles';
 
 const TeamHeader = ({ team }) => {
   const { image: stadiumImage, name: stadiumName, capacity } = team?.[0]?.venue || {};
@@ -8,7 +10,7 @@ const TeamHeader = ({ team }) => {
   const { name: coachName } = team?.[0]?.coach || {};
 
   return (
-    <TeamInfoSection>
+    <TeamHeaderWrapper>
       <TeamImage src={stadiumImage} alt={stadiumName} />
 
       <TeamHeaderContent>
@@ -18,7 +20,7 @@ const TeamHeader = ({ team }) => {
         <TeamInfoItem><strong>Capacity:</strong> {capacity || 'N/A'}</TeamInfoItem>
         <TeamInfoItem><strong>Coach:</strong> {coachName || 'N/A'}</TeamInfoItem>
       </TeamHeaderContent>
-    </TeamInfoSection>
+    </TeamHeaderWrapper>
   );
 };
 

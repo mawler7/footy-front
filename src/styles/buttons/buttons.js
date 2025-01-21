@@ -2,6 +2,22 @@ import styled, { css } from 'styled-components';
 import BaseButton from './BaseButton';
 import { FaStar } from 'react-icons/fa';
 
+export const FloatingNavbarButton = styled(BaseButton)`
+  color: ${({ theme }) => theme.colors.text};
+  width: 50px;
+  height: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.secondary};
+  }
+`;
+
 export const PredictButton = styled(BaseButton)`
   width: 80px;
   height: 28px;
@@ -176,18 +192,16 @@ export const SubTab = styled(Tab)`
 `;
 
 export const ShowMoreTabButton = styled(BaseButton)`
-  width: 105px;
-  padding: ${({ theme }) => theme.spacing.xsmall} ${({ theme }) => theme.spacing.medium};
-  font-size: 0.67rem;
+  width: 85px;
+   font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
 export const ArrowButton = styled(BaseButton)`
   background: ${({ theme }) => theme.colors.secondary};
   display: flex;
   align-items: center;
-  gap: 8px;
      padding: ${({ theme }) => theme.spacing.small};
-       font-size: ${({ theme }) => theme.fontSizes.small};
+       font-size: ${({ theme }) => theme.fontSizes.xsmall};
               color: ${({ theme }) => theme.colors.text};
 `;
 
@@ -214,50 +228,49 @@ export const StyledFilterButton = styled(BaseButton)`
 `;
 
 export const CollapseExpandButton = styled(BaseButton)`
-  background: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.secondary : theme.colors.primary};
-  color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.white : theme.colors.textSecondary};
-  border: none;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  width: 40px;
-  height: 30px;
+
+
   padding: ${({ theme }) => theme.spacing.small};
-  font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  min-width: 45px;
+  height: 25px;
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+font-weight:bold;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.hoverBackground};
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.disabledBackground};
+    color: ${({ theme }) => theme.colors.disabledText};
+    cursor: not-allowed;
+  }
+  }
+`;
+
+export const ActionButton = styled.button`
+  width: 10px;
+  padding: ${({ theme }) => theme.spacing.small};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  border: none;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
-  box-shadow: ${({ $isActive }) =>
-    $isActive ? '0 3px 6px rgba(85, 94, 97, 0.5)' : 'none'};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
+  transition: background-color 0.3s, transform 0.2s;
 
   &:hover {
-    background: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.buttonActive : theme.colors.secondary};
-    color: ${({ theme }) => theme.colors.white};
-    box-shadow: ${({ $isActive }) =>
-    $isActive
-      ? '0 4px 8px rgba(85, 94, 97, 0.4)'
-      : '0 3px 6px rgba(68, 76, 78, 0.5)'};
+    background-color: ${({ theme }) => theme.colors.accentHover};
+    transform: scale(1.05);
   }
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(85, 94, 97, 0.6);
-  }
-
-  &:active {
-    transform: scale(0.97);
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.disabledBackground};
+    cursor: not-allowed;
   }
 `;
 
-export const ActionButton = styled(BaseButton)`
-  background: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.accentHover : "transparent"};
-  color: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.text : theme.colors.mutedText};
-`;
 
 export const CloseButton = styled(BaseButton)`
+
   background: none;
   color: ${({ theme }) => theme.colors.mutedText};
   font-size: ${({ theme }) => theme.fontSizes.medium};
@@ -268,8 +281,6 @@ export const CloseButton = styled(BaseButton)`
 `;
 
 export const SavedSlipsToggleButton = styled(BaseButton)`
-  background: transparent;
-  color: ${({ theme }) => theme.colors.mutedText};
   font-size: ${({ theme }) => theme.fontSizes.small};
   display: flex;
   align-items: center;
@@ -285,12 +296,18 @@ export const DeleteButton = styled(BaseButton)`
   font-size: ${({ theme }) => theme.fontSizes.small};
 `;
 
-export const DeleteBetButton = styled(BaseButton)`
-  background: none;
-  color: ${({ theme }) => theme.colors.danger};
-  position: absolute;
-  top: 2px;
-  right: 2px;
+export const DeleteBetButton = styled.button`
+    position: absolute;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: darkred;
+    }
 `;
 
 export const TableFilterButton = styled.div`

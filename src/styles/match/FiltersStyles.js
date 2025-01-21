@@ -1,143 +1,55 @@
 import styled from 'styled-components';
-import DatePicker from 'react-datepicker';
-import BaseButton from '../buttons/BaseButton';
+import { FlexContainer, BaseButton } from '../shared/SharedStyles';
 
-export const FiltersWrapper = styled.div`
-  display: flex;
+export const FiltersWrapper = styled(FlexContainer)`
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-
-   margin-bottom: -${({ theme }) => theme.spacing.medium};
-  width: 100%;
- 
-        
+  ${({ theme }) => theme.media.mobile} {
+  }
+  min-width:435px;
 `;
 
-export const CalendarWrapper = styled.div`
-  display: flex;
+export const CalendarWrapper = styled(FlexContainer)`
+  justify-content: center;
   align-items: center;
- gap: 10px;
+  gap: ${({ theme }) => theme.spacing.small};
+  background-color: ${({ theme }) => theme.colors.background};
+  padding: ${({ theme }) => theme.spacing.small};
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: ${({ theme }) => theme.shadows.default};
 `;
 
-export const FilterButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+export const FilterButtonsWrapper = styled(FlexContainer)`
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  gap:  ${({ theme }) => theme.spacing.small};
+  gap: ${({ theme }) => theme.spacing.small};
 `;
 
 export const ArrowButton = styled(BaseButton)`
-background-color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.backgroundSecondary : theme.colors.white};
-  color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.text : theme.colors.textSecondary};
-  color: ${({ theme }) => theme.colors.text};
-   border-radius: ${({ theme }) => theme.borderRadius};
-  width: 26px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease;
-
+  align-items: center;
+  font-size: ${({ theme }) => theme.fontSizes.medium};
+  color: ${({ theme }) => theme.colors.textOnPrimary};
+  border-radius: 50%;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.hoverBackground};
-  }
-`;
-
-export const CustomDatePicker = styled(DatePicker)`
-  border: none;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  padding: ${({ theme }) => theme.spacing.small};
-  background-color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.backgroundSecondary : theme.colors.white};
-  color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.text : theme.colors.textSecondary};
-  text-align: center;
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  box-shadow: ${({ theme }) => theme.shadows.default};
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  width: 100px;
-
-  &:hover {
-    background-color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.hoverBackground : theme.colors.buttonHover};
-  }
-
-  &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.accent};
-  }
-
- 
-  & .react-datepicker {
-    background-color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.backgroundSecondary : theme.colors.white} !important;
-    border: none !important;
-    box-shadow: ${({ theme }) => theme.shadows.default} !important;
-    color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.text : theme.colors.textSecondary} !important;
-  }
-
-  & .react-datepicker__header {
-    background-color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.background : theme.colors.backgroundSecondary} !important;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.divider} !important;
-  }
-
-  & .react-datepicker__day,
-  & .react-datepicker__day-name {
-    color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.text : theme.colors.textSecondary} !important;
-  }
-
-  & .react-datepicker__day:hover {
-    background-color: ${({ theme }) => theme.colors.hoverBackground} !important;
-  }
-
-  & .react-datepicker__day--selected {
-    background-color: ${({ theme }) => theme.colors.accent} !important;
-    color: ${({ theme }) => theme.colors.white} !important;
-  }
-
-  & .react-datepicker__input-container {
-    input {
-      background-color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.backgroundSecondary : theme.colors.white} !important;
-      color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.text : theme.colors.textSecondary} !important;
-      border: none;
-      text-align: center;
-      font-size: ${({ theme }) => theme.fontSizes.small};
-      border-radius: ${({ theme }) => theme.borderRadius};
-      padding: 8px;
-      width: 100%;
-      box-shadow: ${({ theme }) => theme.shadows.default};
-      transition: background-color 0.3s ease, color 0.3s ease;
-
-      &:hover {
-        background-color: ${({ theme }) =>
-    theme.mode === 'dark' ? theme.colors.hoverBackground : theme.colors.buttonHover} !important;
-      }
-
-      &:focus {
-        outline: 2px solid ${({ theme }) => theme.colors.accent} !important;
-      }
-    }
+    background-color: ${({ theme }) => theme.colors.primaryHover};
   }
 `;
 
 export const FilterButton = styled(BaseButton)`
-  border: none;
+  min-width: 50px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  background-color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.active : theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.text};
   border-radius: ${({ theme }) => theme.borderRadius};
-min-width: 75px;
-height: 25px;
-  font-size: ${({ theme }) => theme.fontSizes.xsmall};
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: pointer;
   &:hover {
     background-color: ${({ theme }) => theme.colors.hoverBackground};
   }
@@ -147,7 +59,62 @@ height: 25px;
   }
 `;
 
-export const ControlsContainer = styled.div`
-  display: flex;
-  justify-content: flex-end; 
+export const StyledDatePickerWrapper = styled.div`
+  .react-datepicker {
+    border-radius: ${({ theme }) => theme.borderRadius};
+    box-shadow: ${({ theme }) => theme.shadows.default};
+    border: 1px solid ${({ theme }) => theme.colors.divider};
+  }
+
+  .react-datepicker__input-container input {
+    background-color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.text};
+        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    text-align: center;
+      padding: ${({ theme }) => theme.spacing.small};
+
+    width: 100px;
+    border: 1px solid ${({ theme }) => theme.colors.divider};
+    border-radius: ${({ theme }) => theme.borderRadius};
+  }
+`;
+
+export const ControlsContainer = styled(FlexContainer)`
+  justify-content: flex-end;
+`;
+
+export const CollapseExpandButton = styled(BaseButton)`
+  font-size: ${({ theme }) => theme.fontSizes.medium};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.textOnPrimary};
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primaryHover};
+  }
+`;
+
+
+export const TooltipWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+export const Tooltip = styled.div`
+  position: absolute;
+  bottom: -100%; 
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  box-shadow: ${({ theme }) => theme.shadows.default};
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+
+  ${TooltipWrapper}:hover & {
+    opacity: 1;
+    visibility: visible;
+  }
 `;

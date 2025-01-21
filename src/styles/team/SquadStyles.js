@@ -1,30 +1,40 @@
 import styled from "styled-components";
-import { sharedTheme } from '../content/themes';
-
-
+import { theme } from '../themes';
 
 export const LeagueFilterWrapper = styled.div`
   display: flex;
   gap: 12px;
-     padding: ${({ theme }) => theme.spacing.large};
   flex-wrap: wrap;
   justify-content: center;
+       padding: ${({ theme }) => theme.spacing.small};
 
 `;
 
+export const SquadWrapper = styled.div`
+  transition: width 0.3s ease-in-out;  
+  
+  border-radius: ${({ theme }) => theme.borderRadius};
+        ${({ theme }) => theme.media.tablet} {
+        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+            padding:0;
+
+    }
+`;
+
+
 export const LeagueButton = styled.button`
   position: relative;
-     height: 40px;
+     height: 0px;
     width: 40px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: ${sharedTheme.transition};
+  transition: ${theme.transition};
 
   &:hover {
-    background: ${({ $isActive }) => ($isActive ? '#4b5357' : sharedTheme.backgroundColorHover)};
+    background: ${({ $isActive }) => ($isActive ? '#4b5357' : theme.backgroundColorHover)};
     transform: scale(1.1);
   }
 
@@ -39,8 +49,8 @@ export const LeagueButton = styled.button`
 `;
 
 export const LeagueLogoImage = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   pointer-events: none;
   border-radius: 5px;
@@ -54,12 +64,12 @@ export const LeagueTooltip = styled.div`
   left: 50%;
   transform: translateX(-50%);
  
-  color: ${sharedTheme.fontColor};
+  color: ${theme.fontColor};
   padding: 6px 12px;
-  border-radius: ${sharedTheme.borderRadius};
+  border-radius: ${theme.borderRadius};
   font-size: 12px;
   white-space: nowrap;
-  box-shadow: ${sharedTheme.boxShadow};
+  box-shadow: ${theme.boxShadow};
   transition: visibility 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 
   ${LeagueButton}:hover & {
@@ -77,13 +87,15 @@ export const LeagueTooltip = styled.div`
 export const SquadTable = styled.table`
   table-layout: auto;
   border-collapse: collapse;
-  border-radius: ${sharedTheme.borderRadius};
-  box-shadow: ${sharedTheme.boxShadow};
+  border-radius: ${theme.borderRadius};
+  box-shadow: ${theme.boxShadow};
   overflow: hidden;
+    width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '60%' : '100%')};
+
 `;
 
 export const TableHeaderRow = styled.tr`
-  font-size: 12px;
+   font-size: ${({ theme }) => theme.fontSizes.xsmall};
   text-transform: uppercase;
   letter-spacing: 0.05em;
   height: 30px;
@@ -93,8 +105,7 @@ export const TableHeaderCell = styled.th`
   padding: 10px;
   text-align: center;
   vertical-align: middle;
-  font-size: 14px;
-
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
 export const TableStatHeaderCell = styled.th`
@@ -117,9 +128,8 @@ export const PositionGroupSeparator = styled.tr`
 export const PlayerRow = styled.tr`
   cursor: pointer;
   &:hover {
-    background: ${sharedTheme.backgroundColorHover};
+    background: ${theme.backgroundColorHover};
   }
-
   &:active {
     transform: scale(0.98);
   }
@@ -135,8 +145,8 @@ export const PlayerInfoCell = styled.td`
 export const StatCell = styled.td`
   text-align: center;
   vertical-align: middle;
-  font-size: 12px;
-  border-bottom: 1px solid ${({ theme }) => theme.borderColor || '#444'};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    border-bottom: 1px solid ${({ theme }) => theme.borderColor || '#444'};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -146,10 +156,11 @@ export const PlayerDetailsWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 8px;
+
 `;
 
 export const PlayerNameText = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
     padding: ${({ theme }) => theme.spacing.xsmall}  ;
   max-width: 150px;
   overflow: hidden;
@@ -159,4 +170,9 @@ export const PlayerNameText = styled.span`
       cursor:pointer;
     text-decoration: underline;
   }
+            ${({ theme }) => theme.media.tablet} {
+        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+            padding:0;
+
+    }
 `;

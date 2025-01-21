@@ -5,7 +5,7 @@ import { StyledStar } from './buttons';
 const StarButton = ({ onClick, isActive }) => {
   return (
     <StarContainer onClick={onClick}>
-      <StyledStar isActive={isActive} />
+      <StyledStar $isActive={isActive} />
     </StarContainer>
   );
 };

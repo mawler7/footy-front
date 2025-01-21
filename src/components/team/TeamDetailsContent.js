@@ -6,7 +6,7 @@ import Standings from '../league/Standings';
 import Results from '../league/Results';
 import Matches from '../league/Matches';
 import TabContainer from '../common/TabContainer';
-import { LoadingWrapper, Spinner, Tooltip, LeagueLogo } from '../../styles/GlobalStyles';
+import { LoadingWrapper, Spinner, Tooltip, LeagueLogo } from '../../styles/content/GlobalStyles';
 import { LeagueButton } from '../../styles/buttons/buttons';
 import { SummaryTableWrapper } from '../../styles/team/SummaryStyles';
 import { LeagueFilterWrapper } from '../../styles/team/SquadStyles';

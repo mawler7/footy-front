@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { useMemo } from 'react';
 import {
-  Status, TeamWrapper, FixturesTeamLogo, PredictionContainer, PredictionText
+  Status, TeamWrapper,
 } from '../../styles/match/MatchComponentStyles'
+
+import LazyTeamImage from './../team/LazyTeamImage';
 
 export const fetchStandingsData = async (leagueId, filterType, setFixtures, setGroupedStandings) => {
   try {
@@ -83,7 +85,7 @@ const COLORS = {
 };
 
 export const generateChartData = (prediction) => ({
-  labels: ['Form', 'Attack', 'Defense', 'Goals Comparison', 'Total Comparison'],
+  labels: ['Form', 'Attack', 'Defense', 'Goals ', 'Total '],
   datasets: [
     {
       label: prediction.homeTeamName,
@@ -128,33 +130,51 @@ export const generateChartOptions = () => ({
       callbacks: {
         label: (tooltipItem) => `${tooltipItem.dataset.label}: ${tooltipItem.raw}%`,
       },
+      bodyFont: {
+        size: 10, // Rozmiar tekstu w tooltipach
+      },
+      titleFont: {
+        size: 12, // Rozmiar tytułu w tooltipach
+      },
     },
     legend: {
       display: true,
       labels: {
         color: '#ffffff',
-        font: { size: 14 },
+        font: {
+          size: 12, // Rozmiar czcionki legendy
+          weight: 'bold',
+        },
       },
     },
   },
   scales: {
     r: {
-      angleLines: { color: '#6c757d' },
-      grid: { color: '#495057' },
+      angleLines: {
+        color: '#6c757d',
+      },
+      grid: {
+        color: '#495057',
+      },
       ticks: {
         beginAtZero: true,
         max: 100,
         stepSize: 20,
         color: '#e0e0e0',
-        font: { size: 12 },
+        font: {
+          size: 8, // Rozmiar tekstu dla skali
+        },
         z: 1,
         backdropColor: 'rgba(0, 0, 0, 0.5)',
         backdropPadding: 5,
       },
       pointLabels: {
         color: '#ffffff',
-        font: { size: 12, weight: 'bold' },
-        padding: 2,
+        font: {
+          size: 10, // Rozmiar etykiet punktów
+          weight: 'bold',
+        },
+        padding: 4, // Odstępy wokół tekstu etykiet
       },
     },
   },
@@ -267,23 +287,17 @@ export const MatchStatus = ({ status, date, elapsed }) => (
 
 export const TeamInfo = ({ logo, name }) => (
   <TeamWrapper>
-    <FixturesTeamLogo src={logo || 'default-logo.png'} alt={name} />
+    <LazyTeamImage
+      teamId={name} // Możesz zamienić na unikalne ID drużyny, jeśli istnieje
+      logoUrl={logo}
+      alt={name}
+    />
     <span>{name}</span>
   </TeamWrapper>
 );
 
-export const Prediction = ({ advice, homePrediction, awayPrediction, underOver, homeTeam, awayTeam }) => (
-  <PredictionContainer>
-    {advice && <PredictionText>{formatAdvice(advice)}</PredictionText>}
-    {(homePrediction || awayPrediction || underOver) && (
-      <PredictionText>
-        {homePrediction && <>{homeTeam}: {homePrediction}<br /></>}
-        {awayPrediction && <>{awayTeam}: {awayPrediction}<br /></>}
-        {underOver && <>Over/Under: {underOver}</>}
-      </PredictionText>
-    )}
-  </PredictionContainer>
-);
+
+
 
 export const parsePercentage = (value) => {
   if (typeof value === 'string' && value.includes('%')) {
@@ -292,5 +306,3 @@ export const parsePercentage = (value) => {
   }
   return parseFloat(value) || 0;
 };
-
-

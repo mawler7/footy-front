@@ -2,12 +2,10 @@ import styled from "styled-components";
 
 
 export const StatsContainer = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.xlarge};
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.small};
-  margin: auto;
-  width: 95%;
   color: ${({ theme }) => theme.colors.text};
 `;
 
@@ -16,10 +14,9 @@ export const StatRow = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: ${({ theme }) => theme.spacing.small};
-  padding: ${({ theme }) => theme.spacing.xsmall};
+  padding: ${({ theme }) => theme.spacing.small};
   border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
-  width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '460px' : '95%')};
-
+  width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '60%' : '95%')};
   &:last-child {
     border-bottom: none;
   }
@@ -30,7 +27,7 @@ export const StatLabel = styled.div`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.textSecondary};
   flex: 1;
-  min-width: 120px;
+
 `;
 
 export const ProgressBar = styled.div`
@@ -59,7 +56,7 @@ export const AwayProgress = styled.div`
 export const Values = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.xxsmall}; /* Mniejsze odstępy */
+  gap: ${({ theme }) => theme.spacing.xxsmall};  
 `;
 
 export const Value = styled.span`
@@ -67,5 +64,5 @@ export const Value = styled.span`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.text};
   text-align: center;
-  min-width: 50px; /* Zmniejszona minimalna szerokość */
+  min-width: 50px;  
 `;

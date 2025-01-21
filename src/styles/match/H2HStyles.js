@@ -2,18 +2,24 @@ import styled from 'styled-components';
 import BaseButton from '../buttons/BaseButton';
 
 export const H2HTableWrapper = styled.div`
- padding: ${({ theme }) => theme.spacing.medium};
   border-radius: ${({ theme }) => theme.borderRadius};
-  overflow-x: auto;
+    ${({ theme }) => theme.media.tablet} {
+     padding: 0 ${({ theme }) => theme.spacing.small};;
+  }
 `;
 
 export const SectionTitle = styled.h4`
+  margin-bottom: ${({ theme }) => theme.spacing.xsmall}; 
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: ${({ theme }) => theme.fontSizes.medium};
   color: ${({ theme }) => theme.colors.text};
   border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+      ${({ theme }) => theme.media.tablet} {
+     font-size: ${({ theme }) => theme.fontSizes.small};
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -25,7 +31,7 @@ export const FormContainer = styled.div`
 export const FormItem = styled.div`
   width: 20px;
   height: 20px;
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,6 +39,10 @@ export const FormItem = styled.div`
     result === 'W' ? 'green' : result === 'D' ? 'orange' : 'red'};
   color: white;
   border-radius: 3px;
+      ${({ theme }) => theme.media.tablet} {
+  width: 15px;
+  height: 15px;
+    }
 `;
 
 export const ShowMoreTabButton = styled(BaseButton)`
@@ -46,6 +56,8 @@ export const ShowMoreTabButton = styled(BaseButton)`
 `;
 
 export const TableRow = styled.div`
+ padding: ${({ theme }) => theme.spacing.xsmall};
+
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -55,53 +67,66 @@ export const TableRow = styled.div`
   &:hover {
     background-color: rgba(255, 255, 255, 0.08);
   }
+        ${({ theme }) => theme.media.tablet} {
+     padding: ${({ theme }) => theme.spacing.xsmall};
+  }
 `;
 
 export const DateCell = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
   text-align: left;
   padding: ${({ theme }) => theme.spacing.small};
-  width: 50px; /* Stała szerokość */
+  width: 50px;  
   flex-shrink: 0;  
 `;
 
 export const HomeTeamCell = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1;
-  gap: 8px;
+    display: flex;
+    align-items:  center;
+    justify-content: flex-end; 
+    flex: 2; 
+        gap:4px; /* Brak odstępów między kolumnami */
+        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    ${({ theme }) => theme.media.tablet} {
+            gap: ${({ theme }) => theme.spacing.xsmall};
+    }
 `;
 
-export const AwayTeamCell = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex: 1;
-  gap: 8px;
+export const AwayTeamCell = styled(HomeTeamCell)`
+    justify-content: flex-start; 
 `;
 
 export const ScoreCell = styled.div`
-  text-align: center;
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  width: 50px;
-  flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    color: ${({ theme }) => theme.colors.white};
+    flex: 0.25; 
+        ${({ theme }) => theme.media.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+            flex: 0.3; 
+
+    }
 `;
 
 export const TeamName = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.xsmall};
-  font-weight:bold;
-    white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: ${({ align }) => align || 'center'};
-
+    font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    color: ${({ theme }) => theme.colors.white};
+    overflow: hidden;
+    max-width: 150px; 
+    ${({ theme }) => theme.media.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+        max-width: 150px;
+    }
 `;
+
 
 export const TeamLogo = styled.img`
   width: 20px;
   height: 20px;
   object-fit: contain;
+  
 `;
 
 export const Score = styled.span`

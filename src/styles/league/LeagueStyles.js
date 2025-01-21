@@ -11,6 +11,7 @@ export const RoundHeader = styled.div`
   background: ${({ theme }) => theme.colors.backgroundSecondary};
   border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
   cursor: pointer;
+  
 `;
 
 export const ResultsTableWrapper = styled.div`
@@ -18,6 +19,7 @@ export const ResultsTableWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing.small};
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: ${({ theme }) => theme.shadows.default};
+  
 `;
 
 

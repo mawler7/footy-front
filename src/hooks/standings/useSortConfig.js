@@ -14,6 +14,7 @@ export const useSortConfig = (defaultKey = 'points', defaultDirection = 'desc') 
         return [...teams].sort((a, b) => {
             const getValue = (team, key) => {
                 if (key === 'team.name') return team.team.name.toLowerCase();
+                if (key === 'formPoints') return team.formPoints; // Obsługa formPoints
                 return key.split('.').reduce((obj, k) => (obj ? obj[k] : undefined), team);
             };
 

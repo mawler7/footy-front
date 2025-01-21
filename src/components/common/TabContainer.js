@@ -4,7 +4,7 @@ import { Tab } from "../../styles/buttons/buttons";
 
 const TabContainer = ({ tabs, activeTab, onTabClick, isBettingSlipOpen }) => {
   return (
-    <TabContainerWrapper isBettingSlipOpen={isBettingSlipOpen}>
+    <TabContainerWrapper $isBettingSlipOpen={isBettingSlipOpen}>
       {tabs?.map(({ key, label, isVisible }) =>
         isVisible ? (
           <Tab

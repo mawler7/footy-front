@@ -1,10 +1,16 @@
-import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const tokenManager = {
+    getToken: () => localStorage.getItem('authToken'),
+    setToken: (token) => localStorage.setItem('authToken', token),
+    clearToken: () => localStorage.removeItem('authToken'),
+};
 
 const useAuth = () => {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
+    const [isLoggedIn, setIsLoggedIn] = useState(!!tokenManager.getToken());
     const [isLoading, setIsLoading] = useState(true);
 
     const saveToken = useCallback((token) => {
@@ -12,20 +18,20 @@ const useAuth = () => {
             console.error('No token provided.');
             return;
         }
-        localStorage.setItem('authToken', token);
+        tokenManager.setToken(token);
         setIsLoggedIn(true);
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }, []);
 
     const handleLogout = useCallback(() => {
-        localStorage.removeItem('authToken');
+        tokenManager.clearToken();
         setIsLoggedIn(false);
         delete axios.defaults.headers.common['Authorization'];
         navigate('/login');
     }, [navigate]);
 
     const verifyToken = useCallback(async () => {
-        const token = localStorage.getItem('authToken');
+        const token = tokenManager.getToken();
         if (!token) {
             setIsLoggedIn(false);
             setIsLoading(false);

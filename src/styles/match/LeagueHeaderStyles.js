@@ -2,22 +2,26 @@ import styled from 'styled-components';
 
 export const LeagueHeaderContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start; /* Dostosowanie do osi pionowej */
+  justify-content: flex-start; /* Elementy wyrównane do lewej */
 
   ${({ theme }) => theme.media.tablet} {
     flex-direction: column;
+    align-items: flex-start; /* Utrzymanie wyrównania do lewej także w widoku mobilnym */
     gap: ${({ theme }) => theme.spacing.medium};
+    
   }
-    cursor:pointer;
+  cursor: pointer;
 `;
 
 export const LeftSection = styled.div`
+
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.small};
   ${({ theme }) => theme.media.tablet} {
     gap: ${({ theme }) => theme.spacing.small};
+
   }
 `;
 
@@ -34,8 +38,8 @@ export const LeagueLogo = styled.img`
   }
 
   ${({ theme }) => theme.media.tablet} {
-    height: 56px;
-    width: 56px;
+    height: 25px;
+    width: 25px;
   }
 `;
 
@@ -45,15 +49,21 @@ export const LeagueInfo = styled.div`
   justify-content: center;
   gap: ${({ theme }) => theme.spacing.small};
   border-radius: ${({ theme }) => theme.borderRadius};
+    ${({ theme }) => theme.media.tablet} {
+
 `;
 
 export const LeagueName = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes.small};
+    font-size: ${({ theme }) => theme.fontSizes.small};
+ 
   color: ${({ theme }) => theme.colors.text};
   margin: 0;
   ${({ theme }) => theme.media.tablet} {
-    font-size: ${({ theme }) => theme.fontSizes.medium};
     text-align: center;
+        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+
+  }
+
   }
 `;
 

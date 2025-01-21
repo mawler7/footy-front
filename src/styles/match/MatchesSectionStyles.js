@@ -1,36 +1,50 @@
 
 import styled from 'styled-components';
+import { ListContainer } from '../shared/SharedStyles';
+
 
 export const SectionWrapper = styled.div`
    display: flex;
   flex-direction: column;
-margin
-  width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '440px' : '100%')};
   transition: width 0.3s ease;
   box-shadow: ${({ theme }) => theme.boxShadow};
-  padding: ${({ theme }) => theme.spacing.xsmall};
+margin-auto;
+width: 435px;
 `;
 
 export const SectionHeader = styled.h2`
-  font-size: ${({ theme }) => theme.fontSizes.medium};
-  font-weight: 600;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  padding: ${({ theme }) => theme.spacing.small};
   margin-bottom: ${({ theme }) => theme.spacing.small};
   color: ${({ theme }) => theme.colors.text};
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.accentHover};
+    box-shadow: ${({ theme }) =>
+    theme.mode === 'light'
+      ? '0 0 10px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 0, 0, 0.4)'
+      : 'none'};
+  }
+    box-shadow: ${({ theme }) =>
+    theme.mode === 'light'
+      ? '0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.2)'
+      : 'none'};
+        cursor: pointer;
 `;
 
 export const LeagueSection = styled.div`
-  width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '440px' : '90%')};
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.colors.text};
+  
 `;
 
 export const LeagueHeader = styled.div`
   display: flex;
   align-items: center;
+min-width:420px;  
   padding: ${({ theme }) => theme.spacing.small};
-  border: 1px solid
-    ${({ theme }) => (theme.mode === 'light' ? '#000000' : 'transparent')};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
   box-shadow: ${({ theme }) =>
     theme.mode === 'light'
       ? '0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.2)'
@@ -49,8 +63,8 @@ export const LeagueHeader = styled.div`
 
 
 export const LeagueLogo = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 4px;
   object-fit: contain;
   margin-right: ${({ theme }) => theme.spacing.small};
@@ -62,7 +76,6 @@ export const LeagueName = styled.span`
   color: ${({ theme }) => theme.colors.text};
 `;
 
-export const MatchesList = styled.div`
-  display: flex;
-  flex-direction: column;
+export const MatchesList = styled(ListContainer)`
+  border-radius: ${({ theme }) => theme.borderRadius};
 `;

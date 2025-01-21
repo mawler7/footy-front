@@ -1,59 +1,30 @@
-import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { LoadingWrapper, Spinner } from '../../styles/GlobalStyles';
+import React, { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import { LoadingWrapper, Spinner } from "../../styles/content/GlobalStyles";
+import { MainContentWrapper } from "../../styles/content/AppContentStyles";
+import AdminView from "../navbar/AdminView";
 
-const MatchesWrapper = lazy(() => import('../../components/matches/MatchesWrapper'));
-const League = lazy(() => import('../../components/league/League'));
-const Match = lazy(() => import('./../match/Match'));
-const PlayerDetails = lazy(() => import('../../components/players/PlayerDetails'));
-const Team = lazy(() => import('../../components/team/Team'));
-const LoginPage = lazy(() => import('../../components/home/LoginPage'));
+const Player = lazy(() => import("../players/Player"));
+const Team = lazy(() => import("../../components/team/Team"));
+const LoginPage = lazy(() => import("../../components/login/LoginPage"));
+const League = lazy(() => import("../../components/league/League"));
+const Matches = lazy(() => import("../../components/matches/Matches"));
+const Match = lazy(() => import("../../components/match/Match"));
 
-const RoutesConfig = ({
-    selectedDate,
-    setSelectedDate,
-    bettingSlip,
-    setBettingSlip,
-    setShowBubble,
-}) => (
-    <Suspense
-        fallback={
-            <LoadingWrapper>
-                <Spinner />
-            </LoadingWrapper>
-        }
-    >
-        <Routes>
-            <Route
-                path="/"
-                element={
-                    <MatchesWrapper
-                        selectedDate={selectedDate}
-                        setSelectedDate={setSelectedDate}
-                        bettingSlip={bettingSlip}
-                        setBettingSlip={setBettingSlip}
-                        setShowBubble={setShowBubble}
-                        isBettingSlipOpen={setShowBubble}
-                    />
-                }
-            />
-
-            <Route
-                path="/fixture/id/:id"
-                element={
-                    <Match
-                        setBettingSlip={setBettingSlip}
-                        setShowBubble={setShowBubble}
-                        isBettingSlipOpen={setShowBubble}
-                    />
-                }
-            />
-            <Route path="/league/:leagueId" element={<League isBettingSlipOpen={setShowBubble} />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/player/:playerId" element={<PlayerDetails isBettingSlipOpen={setShowBubble} />} />
-            <Route path="/team/:id" element={<Team isBettingSlipOpen={setShowBubble} />} />
-        </Routes>
-    </Suspense>
+const RoutesConfig = ({ showBubble, toggleBettingSlip }) => (
+    <MainContentWrapper>
+        <Suspense fallback={<LoadingWrapper><Spinner /></LoadingWrapper>}>
+            <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/admin" element={<AdminView />} />
+                <Route path="/" element={<Matches toggleBettingSlip={toggleBettingSlip} showBubble={showBubble} />} />
+                <Route path="/fixture/id/:id" element={<Match toggleBettingSlip={toggleBettingSlip} showBubble={showBubble} />} />
+                <Route path="/league/:leagueId" element={<League />} />
+                <Route path="/player/:playerId" element={<Player />} />
+                <Route path="/team/:id" element={<Team />} />
+            </Routes>
+        </Suspense>
+    </MainContentWrapper>
 );
 
 export default RoutesConfig;

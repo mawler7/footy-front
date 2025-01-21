@@ -12,34 +12,45 @@ const useLeagueData = (leagueId) => {
 
         const fetchLeagueData = async () => {
             setLoading(true);
-            setLeagueInfo(null);
-            setCompletedMatches([]);
-            setUpcomingMatches([]);
             try {
                 const token = localStorage.getItem('authToken');
                 const response = await axios.get(`http://localhost:8080/leagues/${leagueId}`, {
                     headers: { Authorization: `Bearer ${token}` },
+                    withCredentials: true,
                 });
+
+                if (!response.data || Object.keys(response.data).length === 0) {
+                    console.error(`No data returned for league ${leagueId}`);
+                    return;
+                }
 
                 const { standings, fixtures } = response.data;
 
-                setLeagueInfo({ ...response.data, hasStandings: standings?.length > 0 });
-                setCompletedMatches(fixtures.filter(({ status }) => ['FT', 'AET', 'PEN'].includes(status)));
-                setUpcomingMatches(fixtures.filter(({ status }) => ['NS', 'TBD'].includes(status)));
+                setLeagueInfo({
+                    ...response.data,
+                    hasStandings: Array.isArray(standings) && standings.length > 0,
+                    hasFixtures: Array.isArray(fixtures) && fixtures.length > 0,
+                });
+
+                setCompletedMatches(
+                    fixtures?.filter(({ status }) => ['FT', 'AET', 'PEN'].includes(status)) || []
+                );
+                setUpcomingMatches(
+                    fixtures?.filter(({ status }) => ['NS', 'TBD'].includes(status)) || []
+                );
             } catch (error) {
-                console.error('Error fetching league data:', error.message);
+                console.error(`Error fetching league ${leagueId}:`, error.message);
                 setLeagueInfo(null);
             } finally {
                 setLoading(false);
             }
         };
 
+
         fetchLeagueData();
     }, [leagueId]);
 
     return { leagueInfo, completedMatches, upcomingMatches, loading };
 };
-
-
 
 export default useLeagueData;

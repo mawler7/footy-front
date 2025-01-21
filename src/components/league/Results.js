@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LoadingWrapper, Spinner } from '../../styles/GlobalStyles';
+import { LoadingWrapper, Spinner } from '../../styles/content/GlobalStyles';
 import Round from './Round';
 import { ResultsMatchesTableWrapper } from '../../styles/content/AppContentStyles';
 
 const Results = ({ matches }) => {
   const navigate = useNavigate();
   const [expandedRounds, setExpandedRounds] = useState({});
-  const [isLoading, setIsLoading] = useState(true); // Dodany stan
+  const [isLoading, setIsLoading] = useState(true);
 
   const groupedMatches = useMemo(() => {
     if (!matches) return {};
@@ -32,7 +32,7 @@ const Results = ({ matches }) => {
         return acc;
       }, {});
       setExpandedRounds(defaultExpanded);
-      setIsLoading(false); // Ustaw załadowanie jako zakończone
+      setIsLoading(false);
     }
   }, [groupedMatches, matches]);
 

@@ -1,22 +1,25 @@
 import { useCallback } from 'react';
 
 export const useTeamForm = (fixtures) => {
-
-    const calculateForm = useCallback((teamName, matchesPlayed) => {
+    const calculateForm = useCallback((teamName, matchesPlayed, filterType = 'total') => {
         if (!fixtures || !Array.isArray(fixtures) || !teamName || typeof teamName !== 'string') {
-            return [];
+            return { form: [], formPoints: 0 };
         }
 
         const isValidDate = (date) => !isNaN(new Date(date).getTime());
         const currentDate = new Date();
         const validMatchesPlayed = Math.max(matchesPlayed || 5, 1);
 
-        const teamFixtures = fixtures.filter(
-            (match) =>
-                match &&
-                isValidDate(match.date) &&
-                (match.homeTeamName === teamName || match.awayTeamName === teamName)
-        );
+        const teamFixtures = fixtures.filter((match) => {
+            if (!isValidDate(match.date)) return false;
+
+            const isHome = match.homeTeamName === teamName;
+            const isAway = match.awayTeamName === teamName;
+
+            if (filterType === 'home') return isHome;
+            if (filterType === 'away') return isAway;
+            return isHome || isAway;
+        });
 
         const nextMatch = teamFixtures.find((match) => new Date(match.date) > currentDate);
         const pastMatches = teamFixtures
@@ -25,6 +28,7 @@ export const useTeamForm = (fixtures) => {
             .slice(0, Math.min(validMatchesPlayed, 5));
 
         const form = [];
+        let formPoints = 0;
 
         if (nextMatch) {
             form.push({
@@ -45,6 +49,8 @@ export const useTeamForm = (fixtures) => {
             const color = result === 'W' ? '#27ae60' : result === 'D' ? '#f39c12' : '#e74c3c';
             const tooltip = `${match.homeTeamName} ${match.fullTimeHome} - ${match.fullTimeAway} ${match.awayTeamName}\n${new Date(match.date).toLocaleString()}`;
 
+            formPoints += result === 'W' ? 3 : result === 'D' ? 1 : 0;
+
             form.push({
                 result,
                 color,
@@ -53,7 +59,7 @@ export const useTeamForm = (fixtures) => {
             });
         });
 
-        return form.slice(0, validMatchesPlayed + 1);
+        return { form: form.slice(0, validMatchesPlayed + 1), formPoints };
     }, [fixtures]);
 
     return { calculateForm };

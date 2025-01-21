@@ -2,6 +2,18 @@ import styled from 'styled-components';
 import BaseButton from '../buttons/BaseButton';
 import { Radar } from 'react-chartjs-2';
 
+export const PredictionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top:  ${({ theme }) => theme.spacing.large};
+  transition: all 0.3s ease-in-out; 
+    ${({ theme }) => theme.media.tablet} {
+    flex-direction: column;
+    text-align: center;
+  }
+`;
 
 export const TabsContainer = styled.div`
   display: flex;
@@ -59,44 +71,44 @@ export const SubTabsContainer = styled(TabsContainer)`
   border-top: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
-export const PredictionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;  
 
-  margin-top:  ${({ theme }) => theme.spacing.medium};
-
-
-  transition: all 0.3s ease-in-out; 
-`;
 
 export const ChartWrapper = styled.div`
   width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '70%' : '80%')};  
   max-width: 700px; 
-  min-width: 400px; 
-  min-height: 400px; 
+ min-width:360px;
+
+  aspect-ratio: 1 / 1; /* Dodanie proporcji dla kwadratowego wykresu */
   border-radius: ${({ theme }) => theme.borderRadius};
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: width 0.3s ease-in-out;  
+  margin: 0 auto; /* Wyśrodkowanie */
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;  
+     ${({ theme }) => theme.media.mobile} {
+        width: 40%; /* Dopasowanie szerokości do rodzica */
+  min-width: 250px; 
+    }
 `;
+
 
 export const Title = styled.h3`
   text-align: center;
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.fontSizes.medium};
-  margin-bottom: ${({ theme }) => theme.spacing.medium};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
 export const AdviceText = styled.span`
   display: block;
-  font-size: ${({ theme }) => theme.fontSizes.small};
+      flex-direction: column;
+    text-align: center;
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
   color: ${({ theme }) => theme.colors.text};
   font-weight: bold;
-  margin-top: ${({ theme }) => theme.spacing.small};
+      ${({ theme }) => theme.media.tablet} {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 export const StyledRadar = styled(Radar)`

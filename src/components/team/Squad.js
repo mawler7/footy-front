@@ -16,9 +16,9 @@ import {
     PlayerRow,
     LeagueFilterWrapper,
     LeagueTooltip,
+    SquadWrapper
 } from '../../styles/team/SquadStyles';
 import { LeagueButton } from '../../styles/buttons/buttons';
-import { StyledStandingWrapper } from '../../styles/standings/StandingsStyles';
 
 const YellowCardIcon = () => (
     <svg width="12" height="15" viewBox="0 0 20 20" fill="yellow">
@@ -35,7 +35,7 @@ const RedCardIcon = () => (
 const Squad = ({ id }) => {
     const [squad, setSquad] = useState([]);
     const [activeLeague, setActiveLeague] = useState(null);
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+    const [sortConfig, setSortConfig] = useState({ key: 'minutes', direction: 'desc' });
 
     useEffect(() => {
         if (!id) {
@@ -142,7 +142,7 @@ const Squad = ({ id }) => {
     };
 
     return (
-        <StyledStandingWrapper >
+        <SquadWrapper >
 
             <LeagueFilterWrapper>
                 {squad.map((league) => (
@@ -188,6 +188,10 @@ const Squad = ({ id }) => {
                                                 playerId={playerData.player.id}
                                                 photoUrl={playerStats.photo}
                                                 alt={playerData.player.name}
+                                                style={{
+                                                    width: '30px',
+                                                    height: '30px',
+                                                }}
                                             />
                                             <PlayerNameText>{playerData.player.name}</PlayerNameText>
                                         </PlayerDetailsWrapper>
@@ -206,7 +210,7 @@ const Squad = ({ id }) => {
                     </React.Fragment>
                 ))}
             </SquadTable>
-        </  StyledStandingWrapper>
+        </  SquadWrapper>
     );
 };
 
