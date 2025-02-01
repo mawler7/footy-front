@@ -5,52 +5,69 @@ const useLeagueData = (leagueId) => {
     const [leagueInfo, setLeagueInfo] = useState(null);
     const [completedMatches, setCompletedMatches] = useState([]);
     const [upcomingMatches, setUpcomingMatches] = useState([]);
+    const [topScorers, setTopScorers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (!leagueId) return;
 
         const fetchLeagueData = async () => {
             setLoading(true);
+            setError(null);
+
             try {
                 const token = localStorage.getItem('authToken');
-                const response = await axios.get(`http://localhost:8080/leagues/${leagueId}`, {
+
+                const leagueResponse = await axios.get(`http://localhost:8080/leagues/${leagueId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                     withCredentials: true,
                 });
 
-                if (!response.data || Object.keys(response.data).length === 0) {
-                    console.error(`No data returned for league ${leagueId}`);
-                    return;
-                }
-
-                const { standings, fixtures } = response.data;
+                const { standings = [], fixtures = [] } = leagueResponse.data || {};
 
                 setLeagueInfo({
-                    ...response.data,
-                    hasStandings: Array.isArray(standings) && standings.length > 0,
-                    hasFixtures: Array.isArray(fixtures) && fixtures.length > 0,
+                    ...leagueResponse.data,
+                    hasStandings: standings.length > 0,
+                    hasFixtures: fixtures.length > 0,
                 });
 
                 setCompletedMatches(
-                    fixtures?.filter(({ status }) => ['FT', 'AET', 'PEN'].includes(status)) || []
+                    fixtures.filter(({ status }) => ['FT', 'AET', 'PEN'].includes(status))
                 );
                 setUpcomingMatches(
-                    fixtures?.filter(({ status }) => ['NS', 'TBD'].includes(status)) || []
+                    fixtures.filter(({ status }) => ['NS', 'TBD'].includes(status))
                 );
+                console.log(leagueResponse);
+                const scorersResponse = await axios.get(
+                    `http://localhost:8080/player/top-scorers?leagueId=${leagueId}`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                        withCredentials: true,
+                    }
+                );
+                setTopScorers(Array.isArray(scorersResponse.data) ? scorersResponse.data : []);
             } catch (error) {
-                console.error(`Error fetching league ${leagueId}:`, error.message);
+                console.error(`Error fetching league data: ${error.message}`);
+                setError(error.message || 'Failed to fetch league data');
                 setLeagueInfo(null);
             } finally {
                 setLoading(false);
             }
         };
 
-
         fetchLeagueData();
     }, [leagueId]);
 
-    return { leagueInfo, completedMatches, upcomingMatches, loading };
+
+    return {
+        leagueInfo,
+        completedMatches,
+        upcomingMatches,
+        topScorers,
+        loading,
+        error,
+    };
 };
 
 export default useLeagueData;

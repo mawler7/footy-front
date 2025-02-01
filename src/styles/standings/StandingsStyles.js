@@ -23,8 +23,7 @@ export const GroupTitle = styled.h3`
 `;
 
 export const StyledTableContainer = styled.table`
-
-     margin-top: ${({ theme }) => theme.spacing.small};
+  margin-top: ${({ theme }) => theme.spacing.small};
   border-collapse: collapse;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
@@ -40,7 +39,6 @@ export const StyledTableRow = styled.tr`
   &:hover {
     cursor: pointer;
   }
-
 `;
 
 export const StyledTableCell = styled.td`
@@ -55,19 +53,18 @@ export const StyledTableCell = styled.td`
 
 export const StyledTableHeader = styled.th`
   text-align: center;
-
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
   &:hover {
     text-decoration: underline;
   }
-        ${({ theme }) => theme.media.mobile} {
-          font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  ${({ theme }) => theme.media.mobile} {
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
       padding:0;
-    }
-                 &.form-header {
-    ${({ theme }) => theme.media.mobile} {
-      display: none; 
-    }
+  }
+  &.form-header {
+  ${({ theme }) => theme.media.mobile} {
+    display: none; 
+  }
   }
 `;
 
@@ -78,7 +75,6 @@ export const TeamCell = styled.div`
   gap: ${({ theme }) => theme.spacing.xsmall};  
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
-
   &:hover {
     text-decoration: underline;
   }
@@ -104,7 +100,6 @@ export const Legend = styled.div`
 export const LegendItem = styled.div`
   display: flex;
   align-items: center;
-
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
@@ -127,8 +122,7 @@ export const LegendColor = styled.div`
 export const FormContainer = styled.div`
   display: flex;
   justify-content: center; 
-          font-size: ${({ theme }) => theme.fontSizes.xsmall};
-
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
   gap: ${({ theme }) => theme.spacing.xsmall};
   margin: 0 auto;
     ${({ theme }) => theme.media.mobile} {
@@ -155,9 +149,7 @@ export const StyledTableTeamCell = styled.td`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.medium};  
-
-          font-size: ${({ theme }) => theme.fontSizes.xsmall};
-
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
 export const RankSquare = styled.div`
@@ -171,9 +163,9 @@ export const RankSquare = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
   border-radius: ${({ theme }) => theme.borderRadius};
   margin-left:${({ theme }) => theme.spacing.xsmall};
-          ${({ theme }) => theme.media.mobile} {
-        width: 14px; 
-          font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  ${({ theme }) => theme.media.mobile} {
+  width: 14px; 
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
   border-radius: none;
     }
 `;
@@ -193,13 +185,11 @@ export const StandingsFormItem = styled.div`
   }
 `;
 
-
 export const StyledFixturesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: ${({ theme }) => theme.shadows.default};
-  
 `;
 
 export const FixtureRow = styled.div`

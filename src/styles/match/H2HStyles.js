@@ -10,7 +10,6 @@ export const H2HTableWrapper = styled.div`
 
 export const SectionTitle = styled.h4`
   margin-bottom: ${({ theme }) => theme.spacing.xsmall}; 
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,7 +24,6 @@ export const SectionTitle = styled.h4`
 export const FormContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.xsmall};
-
 `;
 
 export const FormItem = styled.div`
@@ -56,8 +54,7 @@ export const ShowMoreTabButton = styled(BaseButton)`
 `;
 
 export const TableRow = styled.div`
- padding: ${({ theme }) => theme.spacing.xsmall};
-
+  padding: ${({ theme }) => theme.spacing.xsmall};
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -81,15 +78,15 @@ export const DateCell = styled.div`
 `;
 
 export const HomeTeamCell = styled.div`
-    display: flex;
-    align-items:  center;
-    justify-content: flex-end; 
-    flex: 2; 
-        gap:4px; /* Brak odstępów między kolumnami */
-        font-size: ${({ theme }) => theme.fontSizes.xsmall};
-    ${({ theme }) => theme.media.tablet} {
-            gap: ${({ theme }) => theme.spacing.xsmall};
-    }
+  display: flex;
+  align-items:  center;
+  justify-content: flex-end; 
+  flex: 2; 
+      gap:4px; 
+      font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  ${({ theme }) => theme.media.tablet} {
+          gap: ${({ theme }) => theme.spacing.xsmall};
+  }
 `;
 
 export const AwayTeamCell = styled(HomeTeamCell)`
@@ -97,36 +94,33 @@ export const AwayTeamCell = styled(HomeTeamCell)`
 `;
 
 export const ScoreCell = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-        font-size: ${({ theme }) => theme.fontSizes.xsmall};
-    color: ${({ theme }) => theme.colors.white};
-    flex: 0.25; 
-        ${({ theme }) => theme.media.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.xsmall};
-            flex: 0.3; 
-
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  color: ${({ theme }) => theme.colors.white};
+  flex: 0.25; 
+   ${({ theme }) => theme.media.mobile} {
+   font-size: ${({ theme }) => theme.fontSizes.xsmall};
+   flex: 0.3; 
+  }
 `;
 
 export const TeamName = styled.span`
-    font-size: ${({ theme }) => theme.fontSizes.xsmall};
-    color: ${({ theme }) => theme.colors.white};
-    overflow: hidden;
-    max-width: 150px; 
-    ${({ theme }) => theme.media.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.xsmall};
-        max-width: 150px;
-    }
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  color: ${({ theme }) => theme.colors.white};
+  overflow: hidden;
+  max-width: 150px; 
+  ${({ theme }) => theme.media.mobile} {
+      font-size: ${({ theme }) => theme.fontSizes.xsmall};
+      max-width: 150px;
+  }
 `;
-
 
 export const TeamLogo = styled.img`
   width: 20px;
   height: 20px;
   object-fit: contain;
-  
 `;
 
 export const Score = styled.span`

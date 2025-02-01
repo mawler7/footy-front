@@ -9,9 +9,9 @@ export const PredictionContainer = styled.div`
   justify-content: center;
   margin-top:  ${({ theme }) => theme.spacing.large};
   transition: all 0.3s ease-in-out; 
-    ${({ theme }) => theme.media.tablet} {
-    flex-direction: column;
-    text-align: center;
+  ${({ theme }) => theme.media.tablet} {
+  flex-direction: column;
+  text-align: center;
   }
 `;
 
@@ -71,26 +71,22 @@ export const SubTabsContainer = styled(TabsContainer)`
   border-top: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
-
-
 export const ChartWrapper = styled.div`
   width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '70%' : '80%')};  
   max-width: 700px; 
- min-width:360px;
-
-  aspect-ratio: 1 / 1; /* Dodanie proporcji dla kwadratowego wykresu */
+  min-width:360px;
+  aspect-ratio: 1 / 1; 
   border-radius: ${({ theme }) => theme.borderRadius};
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto; /* Wyśrodkowanie */
+  margin: 0 auto;
   transition: width 0.3s ease-in-out, height 0.3s ease-in-out;  
      ${({ theme }) => theme.media.mobile} {
-        width: 40%; /* Dopasowanie szerokości do rodzica */
+  width: 40%; 
   min-width: 250px; 
     }
 `;
-
 
 export const Title = styled.h3`
   text-align: center;
@@ -100,8 +96,8 @@ export const Title = styled.h3`
 
 export const AdviceText = styled.span`
   display: block;
-      flex-direction: column;
-    text-align: center;
+  flex-direction: column;
+  text-align: center;
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
   color: ${({ theme }) => theme.colors.text};
   font-weight: bold;

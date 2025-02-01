@@ -27,7 +27,6 @@ export const StatLabel = styled.div`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.textSecondary};
   flex: 1;
-
 `;
 
 export const ProgressBar = styled.div`

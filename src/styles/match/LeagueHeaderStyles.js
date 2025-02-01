@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const LeagueHeaderContainer = styled.div`
   display: flex;
-  align-items: flex-start; /* Dostosowanie do osi pionowej */
-  justify-content: flex-start; /* Elementy wyrównane do lewej */
+  align-items: flex-start;
+  justify-content: flex-start;
 
   ${({ theme }) => theme.media.tablet} {
     flex-direction: column;
-    align-items: flex-start; /* Utrzymanie wyrównania do lewej także w widoku mobilnym */
+    align-items: flex-start;
     gap: ${({ theme }) => theme.spacing.medium};
     
   }
@@ -15,7 +15,6 @@ export const LeagueHeaderContainer = styled.div`
 `;
 
 export const LeftSection = styled.div`
-
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.small};
@@ -26,7 +25,6 @@ export const LeftSection = styled.div`
 `;
 
 export const LeagueLogo = styled.img`
-
   height: 40px;
   width:40px;
   object-fit: contain;
@@ -54,16 +52,13 @@ export const LeagueInfo = styled.div`
 `;
 
 export const LeagueName = styled.h1`
-    font-size: ${({ theme }) => theme.fontSizes.small};
- 
+  font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.text};
   margin: 0;
   ${({ theme }) => theme.media.tablet} {
     text-align: center;
         font-size: ${({ theme }) => theme.fontSizes.xsmall};
-
   }
-
   }
 `;
 

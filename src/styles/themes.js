@@ -1,3 +1,4 @@
+// src/themes.js
 export const breakpoints = {
     mobile: '480px',
     tablet: '768px',
@@ -57,9 +58,14 @@ export const lightTheme = {
         accent: '#007bff',
         accentHover: '#0056b3',
         text: '#212529',
+        textOnAccent: '#ffffff',
         textSecondary: '#6c757d',
         divider: '#dee2e6',
         backgroundSecondary: '#f8f9fa',
+        hoverBackground: '#e9ecef',
+        disabledBackground: '#f8f9fa',
+        disabledText: '#adb5bd',
+        focus: '#0d6efd',
     },
 };
 
@@ -73,8 +79,13 @@ export const darkTheme = {
         accent: '#0d6efd',
         accentHover: '#084298',
         text: '#e9ecef',
+        textOnAccent: '#ffffff',
         textSecondary: '#ced4da',
         divider: '#495057',
         backgroundSecondary: '#2c2c2c',
+        hoverBackground: '#343a40',
+        disabledBackground: '#495057',
+        disabledText: '#6c757d',
+        focus: '#0d6efd',
     },
 };

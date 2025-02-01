@@ -34,7 +34,6 @@ export const BaseButton = styled.button`
   }
 `;
 
-// Card-like container
 export const CardContainer = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius};
   background-color: ${({ theme }) => theme.colors.secondary};
@@ -42,7 +41,6 @@ export const CardContainer = styled.div`
 `;
 
 
-// Dropdown base style
 export const DropdownBase = styled.select`
   padding: ${({ theme }) => theme.spacing.small};
   border: none;
@@ -52,7 +50,6 @@ export const DropdownBase = styled.select`
   cursor: pointer;
 `;
 
-// Brand logo and name
 export const BrandLogo = styled.img`
   width: ${({ size }) => size || '40px'};
   height: ${({ size }) => size || '40px'};
@@ -66,16 +63,13 @@ export const BrandText = styled.h1`
 `;
 
 
-// Flex container for lists
 export const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme, gap }) => gap || theme.spacing.small};
   width: 100%;
-
 `;
 
-// Item in draggable list
 export const DraggableItem = styled.div`
   display: flex;
   align-items: center;
@@ -94,13 +88,11 @@ export const DraggableItem = styled.div`
   }
 `;
 
-// Icon button with hover effects
 export const IconButton = styled.span`
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSizes.medium};
   color: ${({ theme }) => theme.colors.text};
   margin-left: ${({ theme, ml }) => ml || theme.spacing.small};
-
   &:hover {
     background: ${({ theme }) => theme.colors.hoverBackground};
     color: ${({ theme }) => theme.colors.text};
@@ -110,7 +102,6 @@ export const IconButton = styled.span`
 `;
 
 export const SectionWrapper = styled.div`
-  
   border-radius: ${({ theme }) => theme.borderRadius};
 `;
 
@@ -120,7 +111,6 @@ export const Button = styled.button`
   padding: ${({ theme }) => theme.spacing.small} ${({ theme }) => theme.spacing.medium};
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: background-color 0.3s ease;
-
   &:hover {
     background-color: ${({ theme }) => theme.colors.accentHover};
   }
@@ -138,7 +128,6 @@ export const HeaderContainer = styled(SectionWrapper)`
   padding: ${({ theme }) => theme.spacing.small} ${({ theme }) => theme.spacing.medium};
 `;
 
-// ButtonGroup - kontener na grupy przycisków
 export const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
@@ -146,7 +135,6 @@ export const ButtonGroup = styled.div`
   gap: ${({ theme }) => theme.spacing.small};
 `;
 
-// Label - etykiety dla formularzy
 export const Label = styled.label`
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
   color: ${({ theme }) => theme.colors.text};
@@ -154,7 +142,6 @@ export const Label = styled.label`
   min-width:${({ theme }) => theme.spacing.xlarge};
 `;
 
-// InputField - pola wejściowe
 export const InputField = styled.input`
   padding:${({ theme }) => theme.spacing.small} ${({ theme }) => theme.spacing.medium};
   border: 1px solid ${({ theme }) => theme.colors.divider};
@@ -163,7 +150,7 @@ export const InputField = styled.input`
   color: ${({ theme }) => theme.colors.text};
   background-color: ${({ theme }) => theme.colors.secondary};
   transition: border-color 0.3s ease;
-text-align:left; 
+  text-align:left; 
 
   width: ${({ width }) => width || '100%'};
   max-width: 120px; 
@@ -174,7 +161,6 @@ text-align:left;
   }
 `;
 
-// Checkbox - pole wyboru (checkbox)
 export const Checkbox = styled.input.attrs({ type: "checkbox" })`
   width: 16px;
   height: 16px;
@@ -194,20 +180,17 @@ export const Checkbox = styled.input.attrs({ type: "checkbox" })`
   }
 `;
 
-
 export const Header = styled.header`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
 `;
-
-
 
 export const BubbleContainerBase = styled.div`
   position: fixed;
   top: ${({ theme }) => theme.spacing.small};
-  right: ${({ show }) => (show ? theme.spacing.small : '-320px')}; /* Wysuwanie z boku */
+  right: ${({ show }) => (show ? theme.spacing.small : '-320px')}; 
   z-index: 1000;
   width: 320px;
   max-height: 80vh;
@@ -229,7 +212,6 @@ export const BubbleContainerBase = styled.div`
   }
 `;
 
-
 export const BubbleHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -246,4 +228,63 @@ export const BubbleContent = styled(FlexContainer)`
   padding: ${({ theme }) => theme.spacing.medium};
   gap: ${({ theme }) => theme.spacing.small};
   max-height: 70vh;
+`;
+
+export const TableCell = styled.div`
+  margin: 0; 
+  box-sizing: border-box;
+`;
+
+export const FiltersWrapper = styled.div`
+    display: flex;
+    gap: ${({ theme }) => theme.spacing.small};
+    margin-bottom: ${({ theme }) => theme.spacing.medium};
+`;
+
+export const ErrorText = styled.p`
+    color: ${({ theme }) => theme.colors.error};
+    text-align: center;
+    margin-top: ${({ theme }) => theme.spacing.medium};
+`;
+
+export const LoadingText = styled.p`
+  color: ${({ theme }) => theme.colors.info};
+  text-align: center;
+  margin-top: ${({ theme }) => theme.spacing.medium};
+`;
+
+export const NoMatchesText = styled.p`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  text-align: center;
+  margin-top: ${({ theme }) => theme.spacing.medium};
+`;
+
+export const StyledTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+      background-color: ${({ theme }) => theme.colors.secondary};
+      color: ${({ theme }) => theme.colors.text};
+      padding: ${({ theme }) => theme.spacing.small};
+      text-align: left;
+      border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+  }
+
+  td {
+      padding: ${({ theme }) => theme.spacing.small};
+      border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+  }
+
+  tr:hover {
+      background-color: ${({ theme }) => theme.colors.hoverBackground};
+  }
+`;
+
+export const LeagueLogo = styled.img`
+    width: 24px;
+    height: 24px;
+    margin-right: ${({ theme }) => theme.spacing.small};
+    border-radius: 4px;
+    object-fit: cover;
 `;

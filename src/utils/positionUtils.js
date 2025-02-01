@@ -18,9 +18,6 @@ export const getHorizontalPosition = (
     ) * scaleFactor;
 };
 
-
-
-
 export const getVerticalPosition = (
     playerIndex,
     totalPlayers,

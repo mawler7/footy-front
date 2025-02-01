@@ -16,8 +16,8 @@ export const useFetchStandings = (leagueId, filterType) => {
             });
 
             const groupedData = Array.isArray(data.standings)
-                ? groupAndSortTeams(data.standings, filterType) // Dla grup
-                : processLeagueStandings(data.standings, filterType); // Dla ligi
+                ? groupAndSortTeams(data.standings, filterType)
+                : processLeagueStandings(data.standings, filterType);
 
             setGroupedStandings(groupedData);
             setFixtures(data.fixtures || []);
@@ -43,8 +43,7 @@ export const useFetchStandings = (leagueId, filterType) => {
     };
 
     const processLeagueStandings = (standings, filter) => {
-        // Obsługa pojedynczego obiektu standings dla ligi
-        const teams = Object.values(standings || {}).flat(); // Pobranie drużyn jako tablicy
+        const teams = Object.values(standings || {}).flat();
         const filteredData = teams.map((team) => {
             const data = filter === 'home' ? team.home : filter === 'away' ? team.away : team.all;
             const points = (data.win || 0) * 3 + (data.draw || 0);
@@ -52,7 +51,7 @@ export const useFetchStandings = (leagueId, filterType) => {
         });
 
         return {
-            League: filteredData.sort((a, b) => b.points - a.points), // Sortowanie po punktach
+            League: filteredData.sort((a, b) => b.points - a.points),
         };
     };
 

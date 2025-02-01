@@ -6,26 +6,23 @@ export const LeagueFilterWrapper = styled.div`
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-       padding: ${({ theme }) => theme.spacing.small};
-
+  padding: ${({ theme }) => theme.spacing.small};
 `;
 
 export const SquadWrapper = styled.div`
   transition: width 0.3s ease-in-out;  
-  
   border-radius: ${({ theme }) => theme.borderRadius};
-        ${({ theme }) => theme.media.tablet} {
-        font-size: ${({ theme }) => theme.fontSizes.xsmall};
-            padding:0;
-
+  ${({ theme }) => theme.media.tablet} {
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  padding:0;
     }
 `;
 
 
 export const LeagueButton = styled.button`
   position: relative;
-     height: 0px;
-    width: 40px;
+  height: 0px;
+  width: 40px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -63,7 +60,6 @@ export const LeagueTooltip = styled.div`
   bottom: calc(100% + 5px);
   left: 50%;
   transform: translateX(-50%);
- 
   color: ${theme.fontColor};
   padding: 6px 12px;
   border-radius: ${theme.borderRadius};
@@ -90,12 +86,11 @@ export const SquadTable = styled.table`
   border-radius: ${theme.borderRadius};
   box-shadow: ${theme.boxShadow};
   overflow: hidden;
-    width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '60%' : '100%')};
-
+  width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '60%' : '100%')};
 `;
 
 export const TableHeaderRow = styled.tr`
-   font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
   text-transform: uppercase;
   letter-spacing: 0.05em;
   height: 30px;
@@ -122,7 +117,6 @@ export const TableStatHeaderCell = styled.th`
 
 export const PositionGroupSeparator = styled.tr`
   height: 15px;
- 
 `;
 
 export const PlayerRow = styled.tr`
@@ -146,7 +140,7 @@ export const StatCell = styled.td`
   text-align: center;
   vertical-align: middle;
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
-    border-bottom: 1px solid ${({ theme }) => theme.borderColor || '#444'};
+  border-bottom: 1px solid ${({ theme }) => theme.borderColor || '#444'};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -156,23 +150,21 @@ export const PlayerDetailsWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 8px;
-
 `;
 
 export const PlayerNameText = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
-    padding: ${({ theme }) => theme.spacing.xsmall}  ;
+  padding: ${({ theme }) => theme.spacing.xsmall}  ;
   max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-        &:hover {
-      cursor:pointer;
-    text-decoration: underline;
+  &:hover {
+  cursor:pointer;
+  text-decoration: underline;
   }
-            ${({ theme }) => theme.media.tablet} {
-        font-size: ${({ theme }) => theme.fontSizes.xsmall};
-            padding:0;
-
+  ${({ theme }) => theme.media.tablet} {
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  padding:0;
     }
 `;

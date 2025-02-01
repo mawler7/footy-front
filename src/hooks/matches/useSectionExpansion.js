@@ -15,8 +15,7 @@ export const useSectionExpansion = () => {
                 Object.values(groupedMatches).forEach((group) => {
                     updatedSections[section][group.league.id] = !isSectionExpanded;
                 });
-            }
-            else if (leagueId !== null) {
+            } else if (leagueId !== null) {
                 updatedSections[section] = {
                     ...updatedSections[section],
                     [leagueId]: !(updatedSections[section]?.[leagueId] ?? true),
@@ -27,16 +26,23 @@ export const useSectionExpansion = () => {
         });
     };
 
-
     const toggleAll = (groupedMatches) => {
+        if (!groupedMatches || typeof groupedMatches !== 'object') return;
+
         const newState = !isAllExpanded;
 
         setExpandedSections(() => {
             const updatedSections = {};
+
             Object.keys(groupedMatches).forEach((section) => {
+                if (!groupedMatches[section]) return;
+
                 updatedSections[section] = {};
-                Object.values(groupedMatches[section]).forEach((group) => {
-                    updatedSections[section][group.league.id] = newState;
+
+                Object.values(groupedMatches[section] || {}).forEach((group) => {
+                    if (group?.league?.id) {
+                        updatedSections[section][group.league.id] = newState;
+                    }
                 });
             });
 

@@ -30,8 +30,6 @@ export const TeamHeaderWrapper = styled.div`
   }
 `;
 
-
-
 export const TeamImage = styled.img`
   width: 100%;   
   height: 100%;  
@@ -52,7 +50,6 @@ export const TeamHeaderContent = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-
 `;
 
 export const TeamLogoDetails = styled.img`
@@ -61,7 +58,6 @@ export const TeamLogoDetails = styled.img`
   height: 100px;
   object-fit: contain;
   border-radius: ${({ theme }) => theme.borderRadius};
-  
 `;
 
 export const TeamInfoItem = styled.div`

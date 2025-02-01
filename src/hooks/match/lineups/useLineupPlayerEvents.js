@@ -15,6 +15,4 @@ const useLineupPlayerEvents = (events) => {
     }, [events]);
 };
 
-
-
 export default useLineupPlayerEvents;

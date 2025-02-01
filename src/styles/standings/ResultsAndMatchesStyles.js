@@ -64,7 +64,7 @@ export const TableRow = styled.div`
 `;
 
 export const DateCell = styled(TableCell)`
-        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    font-size: ${({ theme }) => theme.fontSizes.xsmall};
     color: ${({ theme }) => theme.colors.white};
     text-align: left; 
     flex: 0.22;
@@ -73,7 +73,6 @@ export const DateCell = styled(TableCell)`
     border:none;
     ${({ theme }) => theme.media.mobile} {
             min-width: 70px;
-
     }
 `;
 
@@ -92,7 +91,7 @@ export const FormItem = styled.div`
 
 export const TeamLogo = styled.img`
     width: 20px;
-    height: 20px;
+    height: max(20px);
     object-fit: contain;
     ${({ theme }) => theme.media.mobile} {
         width: 20px;
@@ -118,6 +117,8 @@ export const TeamName = styled.span`
 `;
 
 export const ScoreCell = styled.div`
+    max-width: 25px; 
+    width: 5%; 
     display: flex;
     align-items: center;
     justify-content: center; 
@@ -127,7 +128,6 @@ export const ScoreCell = styled.div`
         ${({ theme }) => theme.media.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.xsmall};
             flex: 0.3; 
-
     }
 `;
 
@@ -141,7 +141,7 @@ export const ResultIndicatorCell = styled.div`
 export const NoMatches = styled.div`
     text-align: center;
     color: ${({ theme }) => theme.colors.textMuted};
-        font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    font-size: ${({ theme }) => theme.fontSizes.xsmall};
     margin-top: ${({ theme }) => theme.spacing.small};
 `;
 

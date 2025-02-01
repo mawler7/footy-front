@@ -131,10 +131,10 @@ export const generateChartOptions = () => ({
         label: (tooltipItem) => `${tooltipItem.dataset.label}: ${tooltipItem.raw}%`,
       },
       bodyFont: {
-        size: 10, // Rozmiar tekstu w tooltipach
+        size: 10,
       },
       titleFont: {
-        size: 12, // Rozmiar tytułu w tooltipach
+        size: 12,
       },
     },
     legend: {
@@ -142,7 +142,7 @@ export const generateChartOptions = () => ({
       labels: {
         color: '#ffffff',
         font: {
-          size: 12, // Rozmiar czcionki legendy
+          size: 12,
           weight: 'bold',
         },
       },
@@ -162,7 +162,7 @@ export const generateChartOptions = () => ({
         stepSize: 20,
         color: '#e0e0e0',
         font: {
-          size: 8, // Rozmiar tekstu dla skali
+          size: 8
         },
         z: 1,
         backdropColor: 'rgba(0, 0, 0, 0.5)',
@@ -171,10 +171,10 @@ export const generateChartOptions = () => ({
       pointLabels: {
         color: '#ffffff',
         font: {
-          size: 10, // Rozmiar etykiet punktów
+          size: 10,
           weight: 'bold',
         },
-        padding: 4, // Odstępy wokół tekstu etykiet
+        padding: 4,
       },
     },
   },
@@ -288,16 +288,13 @@ export const MatchStatus = ({ status, date, elapsed }) => (
 export const TeamInfo = ({ logo, name }) => (
   <TeamWrapper>
     <LazyTeamImage
-      teamId={name} // Możesz zamienić na unikalne ID drużyny, jeśli istnieje
+      teamId={name}
       logoUrl={logo}
       alt={name}
     />
     <span>{name}</span>
   </TeamWrapper>
 );
-
-
-
 
 export const parsePercentage = (value) => {
   if (typeof value === 'string' && value.includes('%')) {

@@ -2,10 +2,14 @@ import styled from 'styled-components';
 import { FlexContainer, BaseButton } from '../shared/SharedStyles';
 
 export const FiltersWrapper = styled(FlexContainer)`
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${({ theme }) => theme.spacing.medium};
   ${({ theme }) => theme.media.mobile} {
+    flex-direction: column;
   }
-  min-width:435px;
+  min-width: 435px;
 `;
 
 export const CalendarWrapper = styled(FlexContainer)`
@@ -16,25 +20,46 @@ export const CalendarWrapper = styled(FlexContainer)`
   padding: ${({ theme }) => theme.spacing.small};
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: ${({ theme }) => theme.shadows.default};
+  flex-grow: 0; 
 `;
 
+
 export const FilterButtonsWrapper = styled(FlexContainer)`
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing.small};
+  flex-wrap: nowrap;
 `;
 
 export const ArrowButton = styled(BaseButton)`
-  width: 25px;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes.medium};
-  color: ${({ theme }) => theme.colors.textOnPrimary};
-  border-radius: 50%;
+  background: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.accentHover : theme.colors.secondary};
+  color: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.text : theme.colors.textSecondary};
+  border-radius: ${({ theme }) => theme.borderRadius};
+
+  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
+  box-shadow: ${({ $isActive, theme }) =>
+    $isActive ? `0 3px 6px ${theme.colors.shadowAccent}` : "none"};
+
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryHover};
+    background: ${({ $isActive, theme }) =>
+    $isActive ? theme.colors.accentHover : theme.colors.hoverSecondary};
+    color: ${({ theme }) => theme.colors.text};
+    box-shadow: ${({ $isActive, theme }) =>
+    $isActive ? `0 4px 8px ${theme.colors.shadowAccent}` : `0 3px 6px ${theme.colors.shadowLight}`};
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.focus};
+  }
+
+  &:active {
+    transform: scale(0.97);
   }
 `;
 
@@ -63,7 +88,6 @@ export const StyledDatePickerWrapper = styled.div`
   .react-datepicker {
     border-radius: ${({ theme }) => theme.borderRadius};
     box-shadow: ${({ theme }) => theme.shadows.default};
-    border: 1px solid ${({ theme }) => theme.colors.divider};
   }
 
   .react-datepicker__input-container input {
@@ -73,7 +97,7 @@ export const StyledDatePickerWrapper = styled.div`
     text-align: center;
       padding: ${({ theme }) => theme.spacing.small};
 
-    width: 100px;
+    width: 70px;
     border: 1px solid ${({ theme }) => theme.colors.divider};
     border-radius: ${({ theme }) => theme.borderRadius};
   }
@@ -91,7 +115,6 @@ export const CollapseExpandButton = styled(BaseButton)`
     background-color: ${({ theme }) => theme.colors.primaryHover};
   }
 `;
-
 
 export const TooltipWrapper = styled.div`
   position: relative;

@@ -137,12 +137,33 @@ export const Spinner = styled.div`
   }
 `;
 
-
-
 export const TableCell = styled.div`
-  margin: 0; /* Uniknięcie przesunięć */
-  box-sizing: border-box; /* Padding nie wpływa na rozmiar */
+  margin: 0; 
+  box-sizing: border-box; 
 `;
 
+export const FiltersWrapper = styled.div`
+    display: flex;
+    gap: ${({ theme }) => theme.spacing.small};
+    margin-bottom: ${({ theme }) => theme.spacing.medium};
+`;
+
+export const ErrorText = styled.p`
+    color: ${({ theme }) => theme.colors.error};
+    text-align: center;
+    margin-top: ${({ theme }) => theme.spacing.medium};
+`;
+
+export const LoadingText = styled.p`
+    color: ${({ theme }) => theme.colors.info};
+    text-align: center;
+    margin-top: ${({ theme }) => theme.spacing.medium};
+`;
+
+export const NoMatchesText = styled.p`
+    color: ${({ theme }) => theme.colors.textSecondary};
+    text-align: center;
+    margin-top: ${({ theme }) => theme.spacing.medium};
+`;
 
 export default GlobalStyles;

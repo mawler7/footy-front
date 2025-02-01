@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { StyledStar } from './buttons';
 
-
 const StarButton = ({ onClick, isActive }) => {
   return (
     <StarContainer onClick={onClick}>
@@ -22,7 +21,5 @@ const StarContainer = styled.div`
     margin-right: 5px;
   }
 `;
-
-
 
 export default StarButton;

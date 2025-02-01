@@ -8,10 +8,8 @@ export const usePitchDimensions = (initialDimensions = { width: 494, height: 290
         if (pitchElement) {
             const { offsetWidth } = pitchElement;
             const scale = offsetWidth / initialDimensions.width;
-
             const newWidth = initialDimensions.width * scale;
-            const newHeight = initialDimensions.height * scale;
-
+            const newHeight = initialDimensions.height * 1.4;
             if (
                 scaleFactor !== scale ||
                 pitchDimensions.width !== newWidth ||

@@ -1,12 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { loadFromLocalStorage } from '../../utils/localStorageUtils';
+import useAuth from '../context/useAuth';
 
-export const useLeagues = (isLoggedIn, initialOrder = []) => {
+export const useLeagues = (initialOrder = []) => {
+    const { isLoggedIn } = useAuth();
     const [leagues, setLeagues] = useState([]);
-    const [leagueOrder, setLeagueOrder] = useState(() => {
-        const savedOrder = localStorage.getItem('leagueOrder');
-        return savedOrder ? JSON.parse(savedOrder) : initialOrder;
-    });
+    const [leagueOrder, setLeagueOrder] = useState(() =>
+        loadFromLocalStorage('leagueOrder', initialOrder)
+    );
 
     useEffect(() => {
         if (!isLoggedIn) return;
@@ -34,13 +36,11 @@ export const useLeagues = (isLoggedIn, initialOrder = []) => {
         fetchLeagues();
     }, [isLoggedIn, leagueOrder]);
 
-
     const reorderLeagues = (order, leagues) =>
         order.map((id) => leagues.find((league) => league.id === id)).filter(Boolean);
 
     const onDragEnd = useCallback(
         ({ source, destination }) => {
-            console.log('Drag event:', { source, destination });
             if (!destination) return;
 
             const updatedLeagues = Array.from(leagues);
@@ -53,7 +53,6 @@ export const useLeagues = (isLoggedIn, initialOrder = []) => {
         },
         [leagues]
     );
-
 
     return { leagues, onDragEnd };
 };

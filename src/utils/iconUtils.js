@@ -41,5 +41,4 @@ export const getEventIcon = (event) => {
     return null;
 };
 
-
 export const logoSrc = "https://cdn-icons-png.flaticon.com/512/287/287221.png";

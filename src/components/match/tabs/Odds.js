@@ -1,58 +1,32 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-    OddsContainer,
-    OddsColumn,
-    BetNameContainer,
-    OddsRow,
-    OddsCellValue,
-    OddCell,
-    BetNameRow,
-    AdviceContainer,
+    OddsContainer, OddsColumn, BetNameContainer, OddsRow, OddsCellValue, OddCell, BetNameRow, AdviceContainer,
 } from '../../../styles/match/OddsStyles';
 import { LoadingWrapper, Spinner } from '../../../styles/content/GlobalStyles';
 import { BettingSlipContext } from '../../context/BettingSlipContext';
-import { betGroups } from '../../../utils/bettingUtils';
+import { betGroups } from '../../../utils/bettingSlipUtils';
 import { AdviceText } from '../../../styles/match/PredictionStyles';
-import { cleanAdvice } from '../../../utils/predictionsValidator';
+import { cleanAdvice } from '../../../utils/predictionsUtils';
 
-const Odds = ({ odds = [], match, toggleBettingSlip, showBubble }) => {
-
+const Odds = ({ odds = [], match }) => {
     const [expandedBetNames, setExpandedBetNames] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const { addToBettingSlip } = useContext(BettingSlipContext);
-
-
+    const { addToBettingSlip } = React.useContext(BettingSlipContext);
 
     const addToBettingSlipHandler = ({ betName, value, odd }) => {
         const matchInfo = {
-            id: match?.id || null, // Upewnij się, że używasz poprawnego pola
+            id: match?.id || null,
             homeTeamName: match?.homeTeamName || "Unknown",
             awayTeamName: match?.awayTeamName || "Unknown",
             leagueName: match?.leagueName || "Unknown League",
             date: match?.date || "Unknown Date",
         };
-
         if (!matchInfo.id) {
             console.error("Cannot add bet due to missing match ID:", matchInfo);
             return;
         }
-
-        addToBettingSlip({
-            betName,
-            value,
-            odd,
-            matchInfo,
-        });
-
-        if (!showBubble && toggleBettingSlip) {
-            toggleBettingSlip();
-        }
+        addToBettingSlip({ betName, value, odd, matchInfo });
     };
-
-
-
-
-
 
     const groupOdds = (odds) => {
         const grouped = odds.reduce((acc, { betName, value, odd }) => {
@@ -62,7 +36,6 @@ const Odds = ({ odds = [], match, toggleBettingSlip, showBubble }) => {
             acc[betName][value].count += 1;
             return acc;
         }, {});
-
         return Object.entries(grouped).map(([betName, values]) => ({
             betName,
             values: Object.entries(values).map(([value, { totalOdds, count }]) => ({
@@ -78,11 +51,7 @@ const Odds = ({ odds = [], match, toggleBettingSlip, showBubble }) => {
         );
 
     const filterRemainingOdds = (odds, betGroups) => {
-        const allDefinedBetNames = [
-            ...betGroups.main,
-            ...betGroups.secondary,
-            ...betGroups.score,
-        ];
+        const allDefinedBetNames = [...betGroups.main, ...betGroups.secondary, ...betGroups.score];
         return groupOdds(odds.filter((odd) => !allDefinedBetNames.includes(odd.betName)));
     };
 
@@ -93,7 +62,6 @@ const Odds = ({ odds = [], match, toggleBettingSlip, showBubble }) => {
                 return acc;
             }, {})
         );
-
         const timer = setTimeout(() => setIsLoading(false), 1000);
         return () => clearTimeout(timer);
     }, [odds]);
@@ -111,25 +79,11 @@ const Odds = ({ odds = [], match, toggleBettingSlip, showBubble }) => {
                             <OddsRow
                                 key={value}
                                 onClick={() =>
-
-                                    addToBettingSlip({
+                                    addToBettingSlipHandler({
                                         betName,
                                         value,
                                         odd: averageOdd,
-                                        matchInfo: {
-                                            id: match?.id || null,
-                                            homeTeamName: match?.homeTeamName || "Unknown",
-                                            awayTeamName: match?.awayTeamName || "Unknown",
-                                            leagueName: match?.leagueName || "Unknown League",
-                                            date: match?.date || "Unknown Date",
-                                        },
-                                        allBetNames: groupedBets.map((bet) => bet.betName), // Wszystkie unikalne betName
-                                        allValues: groupedBets
-                                            .find((bet) => bet.betName === betName)
-                                            ?.values.map((v) => v.value), // Wszystkie wartości dla tego betName
                                     })
-
-
                                 }
                             >
                                 <OddsCellValue>{value}</OddsCellValue>
@@ -140,7 +94,6 @@ const Odds = ({ odds = [], match, toggleBettingSlip, showBubble }) => {
                 )}
             </div>
         ));
-
 
     const renderRemainingOdds = (remainingBets) => (
         <div>
@@ -153,11 +106,7 @@ const Odds = ({ odds = [], match, toggleBettingSlip, showBubble }) => {
                                 <OddsRow
                                     key={value}
                                     onClick={() =>
-                                        addToBettingSlipHandler({
-                                            betName,
-                                            value,
-                                            odd: averageOdd,
-                                        })
+                                        addToBettingSlipHandler({ betName, value, odd: averageOdd })
                                     }
                                 >
                                     <OddsCellValue>{value}</OddsCellValue>
@@ -187,21 +136,22 @@ const Odds = ({ odds = [], match, toggleBettingSlip, showBubble }) => {
 
     return (
         <>
-            <AdviceContainer>
-                <AdviceText>
-                    <strong>{cleanAdvice(match?.advice)}</strong>
-                    <br />
-                    <span>
-                        <strong>{match?.homeTeamName ?? ''}</strong>: {match?.homePrediction ?? ''}
-                    </span>
-                    <br />
-                    <span>
-                        <strong>{match?.awayTeamName ?? ''}</strong>: {match?.awayPrediction ?? ''}
-                    </span>
-                </AdviceText>
-            </AdviceContainer>
+            <div>
+                <AdviceContainer>
+                    <AdviceText>
+                        <strong>{cleanAdvice(match?.advice)}</strong>
+                        <br />
+                        <span>
+                            <strong>{match?.homeTeamName ?? ''}</strong>: {match?.homePrediction ?? ''}
+                        </span>
+                        <br />
+                        <span>
+                            <strong>{match?.awayTeamName ?? ''}</strong>: {match?.awayPrediction ?? ''}
+                        </span>
+                    </AdviceText>
+                </AdviceContainer>
+            </div>
             <OddsContainer>
-
                 <OddsColumn>{renderOddsGroup(filterAndGroupOdds(odds, betGroups.main))}</OddsColumn>
                 <OddsColumn>{renderOddsGroup(filterAndGroupOdds(odds, betGroups.secondary))}</OddsColumn>
                 <OddsColumn>{renderOddsGroup(filterAndGroupOdds(odds, betGroups.score))}</OddsColumn>

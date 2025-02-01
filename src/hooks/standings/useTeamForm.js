@@ -43,11 +43,11 @@ export const useTeamForm = (fixtures) => {
 
         pastMatches.forEach((match) => {
             const isHome = match.homeTeamName === teamName;
-            const teamGoals = isHome ? match.fullTimeHome : match.fullTimeAway;
-            const opponentGoals = isHome ? match.fullTimeAway : match.fullTimeHome;
+            const teamGoals = isHome ? match.matchScore.fullTimeHome : match.matchScore.fullTimeAway;
+            const opponentGoals = isHome ? match.matchScore.fullTimeAway : match.matchScore.fullTimeHome;
             const result = teamGoals > opponentGoals ? 'W' : teamGoals === opponentGoals ? 'D' : 'L';
             const color = result === 'W' ? '#27ae60' : result === 'D' ? '#f39c12' : '#e74c3c';
-            const tooltip = `${match.homeTeamName} ${match.fullTimeHome} - ${match.fullTimeAway} ${match.awayTeamName}\n${new Date(match.date).toLocaleString()}`;
+            const tooltip = `${match.homeTeamName} ${match.matchScore.fullTimeHome} - ${match.matchScore.fullTimeAway} ${match.awayTeamName}\n${new Date(match.date).toLocaleTimeString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`;
 
             formPoints += result === 'W' ? 3 : result === 'D' ? 1 : 0;
 

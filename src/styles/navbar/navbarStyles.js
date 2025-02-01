@@ -7,7 +7,7 @@ export const ButtonGroupContainer = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.small};
   ${({ theme }) => theme.media.mobile} {
-    flex-wrap: wrap; /* Przełamanie wierszy dla mniejszych ekranów */
+    flex-wrap: wrap; 
     justify-content: center;
   }
 `;
@@ -35,6 +35,7 @@ export const SettingsDropdownMenu = styled(FlexContainer)`
   box-shadow: ${({ theme }) => theme.shadows.default};
   background-color: ${({ theme }) => theme.colors.primary};
   flex-direction: column;
+  z-index: 999999; 
 `;
 
 export const SettingsContainer = styled(FlexContainer)`

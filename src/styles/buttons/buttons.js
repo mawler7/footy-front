@@ -45,9 +45,8 @@ export const PredictButton = styled(BaseButton)`
 `;
 
 export const TabButton = styled(BaseButton)`
-   font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
   padding: ${({ theme }) => theme.spacing.small};
-
 `;
 
 export const HamburgerButton = styled.button`
@@ -113,9 +112,9 @@ export const FloatingButton = styled(BaseButton)`
   right: 65px;
   z-index: 1000;
   color: ${({ theme }) => theme.colors.text};
-      width: 50px;
-          height: 30px;
-            background: none;
+  width: 50px;
+  height: 30px;
+  background: none;
 `;
 
 export const SortButton = styled(BaseButton)`
@@ -132,9 +131,9 @@ export const ToggleButton = styled(BaseButton)`
   display: flex;
   align-items: center;
   gap: 8px;
-     padding: ${({ theme }) => theme.spacing.small};
-       font-size: ${({ theme }) => theme.fontSizes.xsmall};
-              color: ${({ theme }) => theme.colors.text};
+  padding: ${({ theme }) => theme.spacing.small};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const LeagueButton = styled(BaseButton)`
@@ -200,9 +199,9 @@ export const ArrowButton = styled(BaseButton)`
   background: ${({ theme }) => theme.colors.secondary};
   display: flex;
   align-items: center;
-     padding: ${({ theme }) => theme.spacing.small};
-       font-size: ${({ theme }) => theme.fontSizes.xsmall};
-              color: ${({ theme }) => theme.colors.text};
+  padding: ${({ theme }) => theme.spacing.small};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const CustomDatePicker = styled.input`
@@ -228,13 +227,12 @@ export const StyledFilterButton = styled(BaseButton)`
 `;
 
 export const CollapseExpandButton = styled(BaseButton)`
-
-
   padding: ${({ theme }) => theme.spacing.small};
   min-width: 45px;
   height: 25px;
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
-font-weight:bold;
+  font-weight:bold;
+  
   &:hover {
     background-color: ${({ theme }) => theme.colors.hoverBackground};
   }
@@ -268,9 +266,7 @@ export const ActionButton = styled.button`
   }
 `;
 
-
 export const CloseButton = styled(BaseButton)`
-
   background: none;
   color: ${({ theme }) => theme.colors.mutedText};
   font-size: ${({ theme }) => theme.fontSizes.medium};
@@ -314,7 +310,6 @@ export const TableFilterButton = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.xsmall || "2px"};
   margin-bottom: ${({ theme }) => theme.spacing.small};
- 
 `;
 
 export const StyledStar = styled(FaStar)`

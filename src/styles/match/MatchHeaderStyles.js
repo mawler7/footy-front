@@ -56,8 +56,6 @@ export const MatchDate = styled.div`
   }
 `;
 
-
-
 export const MatchResult = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.xlarge};
   font-weight: bold;
@@ -101,7 +99,6 @@ export const FixtureTeamName = styled.div`
        ${({ theme }) => theme.media.tablet} {
   font-size: ${({ theme }) => theme.fontSizes.small};
   }
-
 `;
 
 export const MainContent = styled.div`

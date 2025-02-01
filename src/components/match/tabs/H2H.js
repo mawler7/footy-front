@@ -1,19 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { filterMatches, formatDate } from '../../common/utils';
-import { ShowMoreTabButton, SubTab, } from "../../../styles/buttons/buttons";
+import { ShowMoreTabButton, SubTab } from "../../../styles/buttons/buttons";
 import {
   AwayTeamCell, DateCell, FormContainer, FormItem, H2HTableWrapper,
   HomeTeamCell, Score, ScoreCell, SectionTitle, TableRow, TeamLogo, TeamName
 } from '../../../styles/match/H2HStyles';
 
-const H2H = ({
-  homeTeamName,
-  awayTeamName,
-  lastHomeMatches = [],
-  lastAwayMatches = [],
-  headToHeadMatches = [],
-}) => {
+const H2H = ({ homeTeamName, awayTeamName, lastHomeMatches = [], lastAwayMatches = [], headToHeadMatches = [] }) => {
   const [activeTab, setActiveTab] = useState('overall');
   const [showMore, setShowMore] = useState([false, false, false]);
   const navigate = useNavigate();
@@ -37,7 +31,6 @@ const H2H = ({
       const isHomeTeam = match.homeTeamName === teamName;
       return getResultIndicator(match.home, match.away, isHomeTeam);
     });
-
     return (
       <H2HTableWrapper>
         <SectionTitle>
@@ -50,7 +43,6 @@ const H2H = ({
             </FormContainer>
           )}
         </SectionTitle>
-
         {filteredMatches.slice(0, showMore[index] ? filteredMatches.length : 5).map((match) => (
           <TableRow key={match.id} onClick={() => navigate(`/fixture/id/${match.id}`)}>
             <DateCell>{formatDate(match.date)}</DateCell>
@@ -67,7 +59,6 @@ const H2H = ({
             </AwayTeamCell>
           </TableRow>
         ))}
-
         {filteredMatches.length > 5 && (
           <ShowMoreTabButton onClick={() => toggleShowMore(index)}>
             {showMore[index] ? 'Show less' : 'Show more'}
@@ -79,17 +70,11 @@ const H2H = ({
 
   return (
     <>
-      <>
-        {tabs.map((tab) => (
-          <SubTab
-            key={tab.value}
-            $isActive={activeTab === tab.value}
-            onClick={() => setActiveTab(tab.value)}
-          >
-            {tab.label}
-          </SubTab>
-        ))}
-      </>
+      {tabs.map((tab) => (
+        <SubTab key={tab.value} $isActive={activeTab === tab.value} onClick={() => setActiveTab(tab.value)}>
+          {tab.label}
+        </SubTab>
+      ))}
       {activeTab === 'overall' && (
         <>
           {renderMatches(lastHomeMatches, homeTeamName, 0, 'overall')}
@@ -99,10 +84,8 @@ const H2H = ({
       {activeTab === 'home' && renderMatches(lastHomeMatches, homeTeamName, 0, 'home')}
       {activeTab === 'away' && renderMatches(lastAwayMatches, awayTeamName, 1, 'away')}
       {renderMatches(headToHeadMatches, null, 2)}
-
     </>
   );
 };
 
 export default H2H;
-

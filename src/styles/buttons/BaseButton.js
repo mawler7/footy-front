@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
 
-
-// Bazowe style przycisków
 export const baseButtonStyles = css`
   display: inline-flex;
   align-items: center;

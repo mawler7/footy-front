@@ -14,8 +14,6 @@ export const LeagueHeaderWrapper = styled.div`
 export const LeftSection = styled.div`
   display: flex;
   align-items: center;
-
-
   ${({ theme }) => theme.media.tablet} {
     gap: ${({ theme }) => theme.spacing.small};
   }
@@ -26,7 +24,6 @@ export const LeagueLogo = styled.img`
   object-fit: contain;
   border-radius: 8px;  
   box-shadow: ${({ theme }) => theme.shadows.light};
-
   padding: ${({ theme }) => theme.spacing.small};
   &:hover {
     transform: scale(1.05);
@@ -72,7 +69,6 @@ export const Placeholder = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.medium};
   color: ${({ theme }) => theme.colors.textSecondary};
   text-align: center;
-
   padding: ${({ theme }) => theme.spacing.medium};
   background-color: ${({ theme }) => theme.colors.backgroundOverlay};
   border-radius: ${({ theme }) => theme.borderRadius};

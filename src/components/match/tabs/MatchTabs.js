@@ -3,7 +3,7 @@ import Prediction from '../subtabs/Prediction';
 import Events from '../subtabs/Events';
 import Statistics from '../subtabs/Statistics';
 import Odds from '../tabs/Odds';
-import H2H from '../tabs//H2H';
+import H2H from '../tabs/H2H';
 import Lineups from '../subtabs/lineups/Lineups';
 import Results from '../../league/Results';
 import Matches from '../../league/Matches';
@@ -25,10 +25,7 @@ const MatchTabs = ({
     match,
     showBubble
 }) => {
-
-
     const { leagueInfo, completedMatches, upcomingMatches, loading } = useLeagueData(match.leagueId);
-
     const standingsSubTabs = useMemo(() => {
         return [
             leagueInfo?.hasStandings && 'Table',
@@ -36,7 +33,6 @@ const MatchTabs = ({
             upcomingMatches.length > 0 && 'Matches',
         ].filter(Boolean);
     }, [leagueInfo, completedMatches, upcomingMatches]);
-
     const matchSubTabs = ['Predictions', 'Lineups', 'Events', 'Statistics'];
 
     useEffect(() => {
@@ -52,7 +48,6 @@ const MatchTabs = ({
 
     const filteredEvents = useFilteredEvents(match?.events);
 
-
     const renderStandingsContent = () => {
         if (loading) {
             return (
@@ -61,14 +56,9 @@ const MatchTabs = ({
                 </LoadingWrapper>
             );
         }
-
-        if (activeSubTab === 'Table') {
-            return <Standings leagueId={match.leagueId} />;
-        } else if (activeSubTab === 'Results') {
-            return <Results matches={completedMatches} />;
-        } else if (activeSubTab === 'Matches') {
-            return <Matches matches={upcomingMatches} />;
-        }
+        if (activeSubTab === 'Table') return <Standings leagueId={match.leagueId} />;
+        if (activeSubTab === 'Results') return <Results matches={completedMatches} />;
+        if (activeSubTab === 'Matches') return <Matches matches={upcomingMatches} />;
         return <div>No data available for this tab.</div>;
     };
 
@@ -78,16 +68,8 @@ const MatchTabs = ({
                 case 'Predictions':
                     return <Prediction prediction={match} />;
                 case 'Lineups':
-                    if (!match.lineups || !match.lineups?.length) {
-                        return;
-                    }
-                    return (
-                        <Lineups
-                            lineups={match?.lineups || []}
-                            players={match?.players || []}
-                            events={match?.events || []}
-                        />
-                    );
+                    if (!match.lineups || !match.lineups.length) return null;
+                    return <Lineups lineups={match.lineups} players={match.players || []} events={match.events || []} />;
                 case 'Events':
                     return <Events
                         firstHalfEvents={filteredEvents.firstHalf}
@@ -96,27 +78,16 @@ const MatchTabs = ({
                         penalties={filteredEvents.penalties}
                         match={match}
                     />;
-
                 case 'Statistics':
-                    return <Statistics statistics={match?.statistics || []} homeTeamId={match?.homeTeamId} awayTeamId={match?.awayTeamId} />;
+                    return <Statistics statistics={match.statistics || []} homeTeamId={match.homeTeamId} awayTeamId={match.awayTeamId} />;
                 default:
                     return null;
             }
         }
-
-        if (activeTab === 'Standings') {
-            return renderStandingsContent();
-        }
-
+        if (activeTab === 'Standings') return renderStandingsContent();
         if (activeTab === 'Odds') {
-            return <Odds
-                odds={match.bets}
-                match={match}
-                toggleBettingSlip={toggleBettingSlip}
-                showBubble={showBubble}
-            />;
+            return <Odds odds={match.bets} match={match} toggleBettingSlip={toggleBettingSlip} showBubble={showBubble} />;
         }
-
         if (activeTab === 'H2H') {
             if (h2hLoading) {
                 return (
@@ -125,9 +96,7 @@ const MatchTabs = ({
                     </LoadingWrapper>
                 );
             }
-            if (h2hError) {
-                return <div>Error loading H2H data.</div>;
-            }
+            if (h2hError) return <div>Error loading H2H data.</div>;
             return (
                 <H2H
                     homeTeamName={match.homeTeamName}
@@ -138,7 +107,7 @@ const MatchTabs = ({
                 />
             );
         }
-        return;
+        return null;
     };
 
     return (
@@ -150,7 +119,6 @@ const MatchTabs = ({
                     </Tab>
                 ))}
             </TabContainerWrapper>
-
             {activeTab === 'Match' && (
                 <TabContainerWrapper>
                     {matchSubTabs.map((subTab) => (

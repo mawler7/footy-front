@@ -41,7 +41,7 @@ export const Subtitle = styled.h2`
 `;
 
 export const GoogleButton = styled.button`
-        color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary};
   font-size: ${({ theme }) => theme.fontSizes.small};
   padding: ${({ theme }) => theme.spacing.xsmall};
   border: none;

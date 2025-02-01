@@ -17,11 +17,9 @@ export const OddsLabel = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
-
-
 export const BubbleContainerWrapper = styled.div`
     position: relative;
-    width: 100%;
+    width: 25%;
     display: flex;
     flex-direction: column;
     background-color: ${({ theme }) => theme.colors.background};
@@ -32,7 +30,7 @@ export const BettingSlipWrapper = styled.div`
   right: 1px;
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
-  transition: right 0.3s ease; /* Animacja wysuwania */
+  transition: right 0.3s ease;
   z-index: 100;
 `;
 
@@ -41,10 +39,9 @@ export const BettingSlipContentWrapper = styled.div`
     border-radius: ${({ theme }) => theme.borderRadius};
 `;
 
-
 export const BubbleContainer = styled.div`
     position: relative;
-          width: 225px; /* Minimalna szerokość etykiety */
+    width: 225px; 
     margin: auto;
     background-color: ${({ theme }) => theme.colors.container};
     box-shadow: ${({ theme }) => theme.shadows.default};
@@ -59,10 +56,7 @@ export const CompactHeaderContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
-
-// Header bąbelka
 export const BubbleHeader = styled.div`
-
   font-size: ${({ theme }) => theme.fontSizes.small};
   display: flex;
   justify-content: space-between;
@@ -70,14 +64,12 @@ export const BubbleHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
-// Treść bąbelka
 export const BubbleContent = styled(FlexContainer)`
   flex-direction: column;
-    font-size: ${({ theme }) => theme.fontSizes.xsmall};
-      border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
-// Przycisk zamykania
 export const CloseButton = styled.button`
   background: none;
   border: none;
@@ -89,10 +81,6 @@ export const CloseButton = styled.button`
   }
 `;
 
-
-
-
-// Przycisk akcji
 export const ActionButton = styled.button`
   border-radius: ${({ theme }) => theme.borderRadius};
   border: none;
@@ -104,10 +92,7 @@ export const ActionButton = styled.button`
   }
 `;
 
-
-
 export const SlipDetailsContainer = styled(FlexContainer)`
-
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.small};
   padding: ${({ theme }) => theme.spacing.small};
@@ -115,21 +100,8 @@ export const SlipDetailsContainer = styled(FlexContainer)`
   box-shadow: ${({ theme }) => theme.shadows.default};
 `;
 
-export const Stake = styled.div`
-
-`;
-
-export const Win = styled.div`
-`;
-
-
-
-
-
-
 export const SavedSlipsToggleButton = styled.button`
-
-      border-radius: 5px;
+    border-radius: 5px;
     border: none;
     font-size: ${({ theme }) => theme.fontSizes.xsmall};
     cursor: pointer;
@@ -152,14 +124,7 @@ export const SavedSlipsToggleButton = styled.button`
   }
 `;
 
-
-
-
-
-
-
 export const OddsInput = styled.input`
-
   padding: ${({ theme }) => theme.spacing.small};
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: border-color 0.3s;
@@ -169,14 +134,6 @@ export const OddsInput = styled.input`
   }
 `;
 
-
-
-
-
-
-
-
-
 export const MatchDate = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
     font-size: 10px;
@@ -184,14 +141,10 @@ export const MatchDate = styled.div`
 `;
 
 export const TeamNames = styled.div`
-    font-weight: bold;
+  font-weight: bold;
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
   color: ${({ theme }) => theme.colors.text};
 `;
-
-
-
-
 
 export const DeleteBetButton = styled.button`
     background: none;
@@ -215,66 +168,53 @@ export const SlipDetails = styled.div`
     }
 `;
 
-
 export const BubbleButtonGroup = styled.div`
     display: flex;
     width: 100%;
-    
 `;
 
 export const BubbleItem = styled.div`
-
   color: ${({ theme }) => theme.colors.text};
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
-    position: relative;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
-
-    
+  position: relative;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
 export const Label = styled.label`
-    font-weight: bold;
-    margin-right: ${({ theme }) => theme.spacing.small};
-    min-width: 80px; /* Minimalna szerokość etykiety */
+  font-weight: bold;
+  margin-right: ${({ theme }) => theme.spacing.small};
+  min-width: 80px;
 `;
-
-
 
 export const BubbleRowWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Wyrównanie całości do prawej */
+    align-items: flex-end; 
     border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
     border-top: 1px solid ${({ theme }) => theme.colors.divider};
     padding:5px;
-
 `;
 
-
-
 export const BetRow = styled.div`
-      width: 225px; /* Minimalna szerokość etykiety */
-
+    width: 225px;
     display: flex;
-    gap: ${({ theme }) => theme.spacing.small}; /* Odstęp między etykietą a inputem */
+    gap: ${({ theme }) => theme.spacing.small}; 
     margin-bottom: ${({ theme }) => theme.spacing.small};
 `;
 
 export const TotalOdds = styled.div`
-    border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
-padding:5px;
-    text-align: right; /* Wyrównanie tekstu do prawej */
-           font-size: ${({ theme }) => theme.fontSizes.xsmall};
-
+  border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+  padding:5px;
+  text-align: right; 
+  font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
 export const PotentialWinnings = styled.div`
     text-align: right; /* Wyrównanie tekstu do prawej */
     padding:5px;
-       font-size: ${({ theme }) => theme.fontSizes.xsmall};
+    font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
 export const EditableContainer = styled.div`
@@ -283,16 +223,10 @@ export const EditableContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.small};
 `;
 
-
-
 export const SlipContentWrapper = styled(FlexContainer)`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.medium};
-
 `;
-
-
-
 
 export const BetDetails = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
@@ -315,7 +249,6 @@ export const BetName = styled.div`
 `;
 
 export const BetOdds = styled.div`
-
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
@@ -327,11 +260,7 @@ export const BetInfo = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
 `;
 
-
-
-
 export const SavedSlipsContainer = styled.div`
-
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.small};
@@ -339,14 +268,11 @@ export const SavedSlipsContainer = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow-y: auto;
   background-color: ${({ theme }) => theme.colors.background};
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Dodaj cień */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   left: 0;
   right: 0;
-  z-index: 10; /* Ustaw wyższy indeks */
+  z-index: 10; 
 `;
-
-
-
 
 export const FloatingButton = styled.button`
   position: fixed;
@@ -375,25 +301,25 @@ export const EditableInput = styled.input`
     border: 1px solid ${({ theme }) => theme.colors.divider};
     border-radius: ${({ theme }) => theme.borderRadius};
     text-align: right;
-height:12px;
+    height:12px;
+
     &:focus {
         outline: none;
         border-color: ${({ theme }) => theme.colors.accent};
     }
 `;
 
-
 export const BonusInput = styled(EditableInput)`
-    max-width: 50px; /* Specjalny rozmiar dla bonusu */
+    max-width: 50px; 
 `;
 
 export const StakeInput = styled(EditableInput)`
-    max-width: 50px; /* Specjalny rozmiar dla stawki */
+    max-width: 50px;
 `;
 
 export const DeleteButton = styled.button`
   background: none;
-color: darkred;
+  color: darkred;
   border: none;
   font-size: ${({ theme }) => theme.fontSizes.small};
   cursor: pointer;
@@ -405,9 +331,6 @@ color: darkred;
   }
 `;
 
-// Kontener na Header
-
-// Przyciski do przełączania
 export const CompactSavedSlipsToggleButton = styled.button`
   display: flex;
   align-items: center;
@@ -432,7 +355,6 @@ export const CompactSavedSlipsToggleButton = styled.button`
   }
 `;
 
-// Zawartość z balansem
 export const BalanceInfo = styled(FlexContainer)`
   gap: ${({ theme }) => theme.spacing.small};
   font-size: ${({ theme }) => theme.fontSizes.xsmall};
@@ -446,18 +368,15 @@ export const BalanceInfo = styled(FlexContainer)`
   }
 `;
 
-
-// Styl dla nazwy slipa
 export const SlipName = styled.span`
   font-size: 10.5px;
   color: ${({ theme }) => theme.colors.text};
-  flex-grow: 1; /* Wypełnia dostępne miejsce */
+  flex-grow: 1;
   text-overflow: ellipsis;
   overflow: hidden;
     width: 260px;
 `;
 
-// Ulepszony styl dla SavedSlipItem
 export const SavedSlipItem = styled.div`
   display: flex;
   align-items: center;
@@ -470,11 +389,6 @@ export const SavedSlipItem = styled.div`
     background-color: ${({ theme }) => theme.colors.hoverBackground};
   }
 `;
-
-
-
-
-
 
 export const SavedBetsWrapper = styled.div`
 `;
