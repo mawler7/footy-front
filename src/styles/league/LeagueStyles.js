@@ -1,7 +1,4 @@
-// LeagueStyles.js
 import styled from 'styled-components';
-
-
 
 export const RoundHeader = styled.div`
   display: flex;
@@ -20,7 +17,6 @@ export const ResultsTableWrapper = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.default};
 `;
 
-
 export const LeagueFilterContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.small};
@@ -31,8 +27,7 @@ export const Sidebar = styled.div`
   margin-top: ${({ theme }) => theme.spacing.small};
   margin-left: ${({ theme }) => theme.spacing.xsmall};
   transition: width 0.3s ease;
-   width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '40px' : '145px; ')};
-
+  width: ${({ isBettingSlipOpen }) => (isBettingSlipOpen ? '40px' : '145px; ')};
 
   ${({ theme }) => theme.media.tablet} {
     justify-content: center;
@@ -87,7 +82,6 @@ export const EditIcon = styled.span`
 `;
 
 export const LeagueItem = styled.div`
- 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -130,8 +124,7 @@ export const LeagueContainerName = styled.span`
 color: ${({ theme }) => theme.colors.text};
 flex-grow: 1;
 margin-left: ${({ theme }) => theme.spacing.xsmall};
-
-  ${({ theme }) => theme.media.tablet} {
+${({ theme }) => theme.media.tablet} {
   display: none;
 }
 `;

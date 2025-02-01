@@ -1,63 +1,70 @@
-import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { tokenManager } from "./tokenManager";
 
 const useAuth = () => {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('authToken'));
-    const [isLoading, setIsLoading] = useState(true);
+    const [authState, setAuthState] = useState({
+        isLoggedIn: !!tokenManager.getToken(),
+        isLoading: true,
+    });
 
     const saveToken = useCallback((token) => {
         if (!token) {
-            console.error('No token provided.');
+            console.error("No token provided.");
             return;
         }
-        localStorage.setItem('authToken', token);
-        setIsLoggedIn(true);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        tokenManager.setToken(token);
+        setAuthState({ isLoggedIn: true, isLoading: false });
     }, []);
 
     const handleLogout = useCallback(() => {
-        localStorage.removeItem('authToken');
-        setIsLoggedIn(false);
-        delete axios.defaults.headers.common['Authorization'];
-        navigate('/login');
+        tokenManager.clearToken();
+        setAuthState({ isLoggedIn: false, isLoading: false });
+        navigate("/login");
     }, [navigate]);
 
     const verifyToken = useCallback(async () => {
-        const token = localStorage.getItem('authToken');
+        const token = tokenManager.getToken();
         if (!token) {
-            setIsLoggedIn(false);
-            setIsLoading(false);
-            navigate('/login');
+            handleLogout();
             return;
         }
+
         try {
-            await axios.get('http://localhost:8080/auth/verify', {
+            await axios.get("http://localhost:8080/auth/verify", {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            setIsLoggedIn(true);
+            setAuthState({ isLoggedIn: true, isLoading: false });
         } catch (error) {
-            console.error('Token verification failed:', error);
+            console.error("Token verification failed:", error.response?.data || error.message);
             handleLogout();
-        } finally {
-            setIsLoading(false);
         }
-    }, [handleLogout, navigate]);
+    }, [handleLogout]);
 
     useEffect(() => {
-        const tokenFromUrl = new URLSearchParams(window.location.search).get('token');
-        if (tokenFromUrl) {
-            saveToken(tokenFromUrl);
-            navigate('/');
-        }
-    }, [navigate, saveToken]);
+        const initializeAuth = async () => {
+            const tokenFromUrl = new URLSearchParams(window.location.search).get("token");
 
-    useEffect(() => {
-        verifyToken();
-    }, [verifyToken]);
+            if (tokenFromUrl) {
+                saveToken(tokenFromUrl);
+                navigate("/");
+                return;
+            }
 
-    return { isLoggedIn, isLoading, saveToken, handleLogout };
+            await verifyToken();
+        };
+
+        initializeAuth();
+    }, [navigate, saveToken, verifyToken]);
+
+    return {
+        isLoggedIn: authState.isLoggedIn,
+        isLoading: authState.isLoading,
+        saveToken,
+        handleLogout,
+    };
 };
 
 export default useAuth;

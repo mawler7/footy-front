@@ -18,7 +18,6 @@ const usePredictionData = (prediction) => {
                 throw new Error('Authentication token is missing.');
             }
 
-            // Fetch additional prediction data
             const response = await axios.get(
                 `http://localhost:8080/fixture/id/info/${prediction.id}`,
                 {
@@ -29,14 +28,12 @@ const usePredictionData = (prediction) => {
 
             const predictionData = response.data;
 
-            // Prepare data to save
             const saveData = {
                 homeTeamName: predictionData.homeTeamName || prediction.homeTeamName,
                 awayTeamName: predictionData.awayTeamName || prediction.awayTeamName,
                 ...predictionData,
             };
 
-            // Save prediction data
             await axios.post(
                 `http://localhost:8080/fixture/savePrediction`,
                 saveData,

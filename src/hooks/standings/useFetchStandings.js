@@ -12,9 +12,13 @@ export const useFetchStandings = (leagueId, filterType) => {
             const token = localStorage.getItem('authToken');
             const { data } = await axios.get(`http://localhost:8080/leagues/${leagueId}`, {
                 headers: { Authorization: `Bearer ${token}` },
+                withCredentials: true,
             });
 
-            const groupedData = groupAndSortTeams(data.standings, filterType);
+            const groupedData = Array.isArray(data.standings)
+                ? groupAndSortTeams(data.standings, filterType)
+                : processLeagueStandings(data.standings, filterType);
+
             setGroupedStandings(groupedData);
             setFixtures(data.fixtures || []);
         } catch (error) {
@@ -36,6 +40,19 @@ export const useFetchStandings = (leagueId, filterType) => {
             acc[groupName].push({ ...team, filteredData, points });
             return acc;
         }, {});
+    };
+
+    const processLeagueStandings = (standings, filter) => {
+        const teams = Object.values(standings || {}).flat();
+        const filteredData = teams.map((team) => {
+            const data = filter === 'home' ? team.home : filter === 'away' ? team.away : team.all;
+            const points = (data.win || 0) * 3 + (data.draw || 0);
+            return { ...team, filteredData: data, points };
+        });
+
+        return {
+            League: filteredData.sort((a, b) => b.points - a.points),
+        };
     };
 
     return { groupedStandings, fixtures };

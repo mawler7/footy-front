@@ -1,12 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { loadFromLocalStorage } from '../../utils/localStorageUtils';
+import useAuth from '../context/useAuth';
 
-export const useLeagues = (isLoggedIn, initialOrder = []) => {
+export const useLeagues = (initialOrder = []) => {
+    const { isLoggedIn } = useAuth();
     const [leagues, setLeagues] = useState([]);
-    const [leagueOrder, setLeagueOrder] = useState(() => {
-        const savedOrder = localStorage.getItem('leagueOrder');
-        return savedOrder ? JSON.parse(savedOrder) : initialOrder;
-    });
+    const [leagueOrder, setLeagueOrder] = useState(() =>
+        loadFromLocalStorage('leagueOrder', initialOrder)
+    );
 
     useEffect(() => {
         if (!isLoggedIn) return;
@@ -19,9 +21,13 @@ export const useLeagues = (isLoggedIn, initialOrder = []) => {
                     withCredentials: true,
                 });
 
-                const orderedLeagues = reorderLeagues(leagueOrder, data);
-                setLeagues(orderedLeagues);
-                setLeagueOrder(orderedLeagues.map(({ id }) => id));
+                if (leagueOrder.length === 0) {
+                    const orderedLeagues = data.map((league) => league.id);
+                    setLeagueOrder(orderedLeagues);
+                    localStorage.setItem('leagueOrder', JSON.stringify(orderedLeagues));
+                }
+
+                setLeagues(reorderLeagues(leagueOrder, data));
             } catch (error) {
                 console.error('Error fetching leagues:', error);
             }
@@ -31,9 +37,7 @@ export const useLeagues = (isLoggedIn, initialOrder = []) => {
     }, [isLoggedIn, leagueOrder]);
 
     const reorderLeagues = (order, leagues) =>
-        order.length
-            ? order.map((id) => leagues.find((league) => league.id === id)).filter(Boolean)
-            : leagues;
+        order.map((id) => leagues.find((league) => league.id === id)).filter(Boolean);
 
     const onDragEnd = useCallback(
         ({ source, destination }) => {
@@ -44,12 +48,11 @@ export const useLeagues = (isLoggedIn, initialOrder = []) => {
             updatedLeagues.splice(destination.index, 0, movedLeague);
 
             setLeagues(updatedLeagues);
-            const newOrder = updatedLeagues.map((league) => league.id);
-            setLeagueOrder(newOrder);
-            localStorage.setItem('leagueOrder', JSON.stringify(newOrder));
+            setLeagueOrder(updatedLeagues.map((league) => league.id));
+            localStorage.setItem('leagueOrder', JSON.stringify(updatedLeagues.map((league) => league.id)));
         },
         [leagues]
     );
 
-    return { leagues, setLeagues, leagueOrder, setLeagueOrder, onDragEnd };
+    return { leagues, onDragEnd };
 };

@@ -1,33 +1,48 @@
-export const useBettingSlip = (setBettingSlip, setShowBubble) => {
-    const handleAddToSlip = ({ betName, value, odd, matchInfo }) => {
-        const { id, homeTeamName, awayTeamName, date, leagueName } = matchInfo;
+import { useState, useCallback } from "react";
+import { isDuplicateBet } from "../../utils/bettingSlipUtils";
 
+export const useBettingSlip = (showBettingSlip, toggleBettingSlip) => {
+    const [bettingSlip, setBettingSlip] = useState([]);
 
-        setBettingSlip((prev) => {
-            const isBetAlreadyAdded = prev.some(
-                (bet) => bet.betName === betName && bet.matchInfo.id === id
-            );
+    const addToBettingSlip = useCallback(
+        (newBet) => {
+            setBettingSlip((prevSlip) => {
+                if (isDuplicateBet(prevSlip, newBet)) {
+                    alert(`You cannot add the same bet (${newBet.betName} - ${newBet.value}) twice for the same match.`);
+                    return prevSlip;
+                }
 
-            if (isBetAlreadyAdded) {
-                alert(
-                    `Bet "${betName}" for the match "${homeTeamName} vs ${awayTeamName}" is already added to the slip. Remove it first to add another.`
+                const updatedSlip = [...prevSlip];
+                const matchIndex = updatedSlip.findIndex(
+                    (bet) => bet.matchInfo.id === newBet.matchInfo.id
                 );
-                return prev;
-            }
 
-            const newBet = {
-                betName: betName || 'Unknown Bet',
-                value: value || 'Unknown Value',
-                odd: odd || '0.00',
-                matchInfo: { id, homeTeamName, awayTeamName, date, leagueName },
-            };
+                if (matchIndex !== -1) {
+                    updatedSlip[matchIndex].bets.push(newBet);
+                } else {
+                    updatedSlip.push({ matchInfo: newBet.matchInfo, bets: [newBet] });
+                }
 
-            setShowBubble(true);
-            return [...prev, newBet];
+                return updatedSlip;
+            });
+
+            if (!showBettingSlip) toggleBettingSlip();
+        },
+        [showBettingSlip, toggleBettingSlip]
+    );
+
+    const removeFromBettingSlip = useCallback((matchIndex, betIndex) => {
+        setBettingSlip((prevSlip) => {
+            const updatedSlip = [...prevSlip];
+            updatedSlip[matchIndex].bets.splice(betIndex, 1);
+            if (updatedSlip[matchIndex].bets.length === 0) updatedSlip.splice(matchIndex, 1);
+            return updatedSlip;
         });
-    };
+    }, []);
 
-    return handleAddToSlip;
+    const clearBettingSlip = useCallback(() => {
+        setBettingSlip([]);
+    }, []);
+
+    return { bettingSlip, addToBettingSlip, removeFromBettingSlip, clearBettingSlip, setBettingSlip };
 };
-
-export default useBettingSlip;
