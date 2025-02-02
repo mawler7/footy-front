@@ -1,4 +1,4 @@
-# FootyStars ⚽  
+# FootyStats ⚽  
 🚀 **An advanced football statistics tracking and betting application**
 
 ## 📌 Project Description
@@ -28,8 +28,8 @@
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/FootyStars.git
-   cd FootyStars
+   git clone https://github.com/mawler7/footy-front.git
+   cd footy-front
    ```
 
 2. **Install dependencies:**
